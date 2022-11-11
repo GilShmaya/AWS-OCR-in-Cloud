@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 public class SQS {
-    private final Region REGION = Region.US_EAST_1; // TODO: check the region
-    private static int DELAY_SECONDS = 5;
-    private static int WAIT_TIME_SECOND = 20;
-    private static Logger logger = LoggerFactory.getLogger(SQS.class);
-    private String queueName;
-    private SqsClient sqsClient;
-    private Map<QueueAttributeName, String> attributes;
+    private static final Region REGION = Region.US_EAST_1; // TODO: check the region
+    private static final int DELAY_SECONDS = 5;
+    private static final int WAIT_TIME_SECOND = 20;
+    private static final Logger logger = LoggerFactory.getLogger(SQS.class);
+    private final String queueName;
+    private final SqsClient sqsClient;
+    private final Map<QueueAttributeName, String> attributes;
     private String url;
 
     public SQS(String queueName) {
