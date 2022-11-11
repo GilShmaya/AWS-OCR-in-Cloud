@@ -5,8 +5,13 @@ import services.S3;
 import services.SQS;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.*;
+import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+
+import java.util.Date;
 
 public class LocalApplication {
+    private static String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
+    private static String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();;
     private static Logger logger = LoggerFactory.getLogger(LocalApplication.class);
     private static String MANAGER_NAME = "manager";
     private static String pathPrefix = System.getProperty("user.dir") + "/src/";
@@ -15,19 +20,20 @@ public class LocalApplication {
     private static int numberOfFilesPerWorker;
     private static boolean terminate = false;
     private static S3 s3 = new S3();
-    private static SQS localToManagerSQS = new SQS();
-    private static SQS managerToLocalSQS = new SQS();
+    private static SQS localToManagerSQS = new SQS(LOCAL_TO_MANAGER_SQS_NAME);
+    private static SQS managerToLocalSQS = new SQS(MANAGER_TO_LOCAL_SQS_NAME);;
 
     private static void createManager() {
         Ec2Client ec2Client = Ec2Client.builder().build();
         if(isActive(ec2Client, MANAGER_NAME)){
+            // if the manager is already exist - request the url of the shared queue to the manager
+            localToManagerSQS.requestQueueURL();
             logger.info("Manager is already active");
-            localToManagerSQS.getURL(); // TODO: check
         } else {
+            // if the manager is not exist yet - create an instance in EC2 and a shared queue to the manager
             new EC2(MANAGER_NAME,);
             localToManagerSQS.create();
         }
-        localToManagerSQS.print(); // TODO: necessary?
     }
 
     // Checks if the node with the name <nodeName> is active on the EC2 cloud.
@@ -61,6 +67,8 @@ public class LocalApplication {
 
     }
 
+
+
     public static void main(String[] args) {
         if(args.length < 3){ // TODO: should be 4? in case of  an optional argument terminate?
             logger.error("Should be 3 arguments:  input file name, output file name and number of process files");
@@ -73,10 +81,9 @@ public class LocalApplication {
             numberOfFilesPerWorker = Integer.parseInt(args[2]);
 
             createManager();
-            String bucketKey = uploadFileToS3(inputFilePath);
+            String bucketLocation = uploadFileToS3(inputFilePath);
             managerToLocalSQS.create();
-            localToManagerSQS.print();
-            managerToLocalSQS.sendMessage()
+            managerToLocalSQS.send("Task " + MANAGER_TO_LOCAL_SQS_NAME + " " + numberOfFilesPerWorker + " " + bucketLocation + " " + s3.getBucket());
 
 
 
