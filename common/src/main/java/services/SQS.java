@@ -70,16 +70,6 @@ public class SQS {
         sqsClient.sendMessage(request);
     }
 
-    public void deleteMessages(List<Message> messages){
-        for (Message m : messages) {
-            DeleteMessageRequest deleteRequest = DeleteMessageRequest.builder()
-                    .queueUrl(url)
-                    .receiptHandle(m.receiptHandle())
-                    .build();
-            sqsClient.deleteMessage(deleteRequest);
-        }
-    }
-
     public List<Message> getMessages(){
         ReceiveMessageRequest request = ReceiveMessageRequest
                 .builder()
@@ -88,5 +78,15 @@ public class SQS {
                 .maxNumberOfMessages(1) // one message each time
                 .build();
         return sqsClient.receiveMessage(request).messages();
+    }
+
+    public void deleteMessages(List<Message> messages){
+        for (Message m : messages) {
+            DeleteMessageRequest deleteRequest = DeleteMessageRequest.builder()
+                    .queueUrl(url)
+                    .receiptHandle(m.receiptHandle())
+                    .build();
+            sqsClient.deleteMessage(deleteRequest);
+        }
     }
 }
