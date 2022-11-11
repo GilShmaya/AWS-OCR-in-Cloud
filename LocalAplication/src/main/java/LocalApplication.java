@@ -15,19 +15,19 @@ public class LocalApplication {
     private static int numberOfFilesPerWorker;
     private static boolean terminate = false;
     private static S3 s3 = new S3();
-    private static SQS managerToLocalSQS = new SQS();
     private static SQS localToManagerSQS = new SQS();
+    private static SQS managerToLocalSQS = new SQS();
 
-    private static void activateManager() {
+    private static void createManager() {
         Ec2Client ec2Client = Ec2Client.builder().build();
         if(isActive(ec2Client, MANAGER_NAME)){
             logger.info("Manager is already active");
-            managerToLocalSQS.getURL();
+            localToManagerSQS.getURL(); // TODO: check
         } else {
             new EC2(MANAGER_NAME,);
-            managerToLocalSQS.create();
+            localToManagerSQS.create();
         }
-        managerToLocalSQS.print(); // TODO: necessary?
+        localToManagerSQS.print(); // TODO: necessary?
     }
 
     // Checks if the node with the name <nodeName> is active on the EC2 cloud.
@@ -66,17 +66,17 @@ public class LocalApplication {
             logger.error("Should be 3 arguments:  input file name, output file name and number of process files");
         } else {
             if(args.length == 4){
-                terminate = true;
+                terminate = true; // TODO: which value should be here? should we check this?
             }
             inputFilePath = pathPrefix + args[0];
             outputFilePath = pathPrefix + args[1];
             numberOfFilesPerWorker = Integer.parseInt(args[2]);
 
-            activateManager();
+            createManager();
             String bucketKey = uploadFileToS3(inputFilePath);
-            localToManagerSQS.create();
-            managerToLocalSQS.print();
-            localToManagerSQS.sendMessage()
+            managerToLocalSQS.create();
+            localToManagerSQS.print();
+            managerToLocalSQS.sendMessage()
 
 
 
