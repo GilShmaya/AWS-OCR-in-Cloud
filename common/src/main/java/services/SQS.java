@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SQS {
-    private static final Region REGION = Region.US_EAST_1; // TODO: check the region
+    private static final Region REGION = Region.US_EAST_1;
     private static final int DELAY_SECONDS = 5;
     private static final int WAIT_TIME_SECOND = 20;
     private static final Logger logger = LoggerFactory.getLogger(SQS.class);

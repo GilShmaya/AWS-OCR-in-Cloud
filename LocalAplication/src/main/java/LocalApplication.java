@@ -15,11 +15,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LocalApplication {
-    private static String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
-    private static String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();
-    private static String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/src/summaryFile.txt";
+    private static final String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
+    private static final String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();
+    private static final String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/src/summaryFile.txt";
     private static String MANAGER_DATA = ""; // TODO!
-    private static Logger logger = LoggerFactory.getLogger(LocalApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocalApplication.class);
     private static String MANAGER_NAME = "manager";
     private static String pathPrefix = System.getProperty("user.dir") + "/src/";
     private static String inputFilePath;

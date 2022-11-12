@@ -6,7 +6,7 @@ import software.amazon.awssdk.services.ec2.model.*;
 import java.util.Base64;
 
 public class EC2 {
-    private String AMI_ID = ""; // TODO
+    private String AMI_ID = ""; // TODO - check if we need to create a new AMI of our own
     private Ec2Client ec2Client;
     private String ec2Name;
     private String instanceId;
@@ -16,12 +16,12 @@ public class EC2 {
         ec2Client = Ec2Client.builder().build();
 
         IamInstanceProfileSpecification IAM_role = IamInstanceProfileSpecification.builder()
-                .arn("arn:aws:iam::263387240235:instance-profile/IAM_Ass1_1").build(); // TODO: change
+                .arn("arn:aws:iam::078280469541:instance-profile/IAM_OCR_IN_CLOUD").build(); // TODO: done
 
         RunInstancesRequest request = RunInstancesRequest.builder()
                 .imageId(AMI_ID)
                 .instanceType(InstanceType.T2_MICRO)
-                .securityGroupIds("sg-047c03574a9f9bc2f") // TODO: change
+                .securityGroupIds("sg-029f32c2fad7294c3") // TODO: done
                 .iamInstanceProfile(IAM_role)
                 .maxCount(maxCount)
                 .minCount(minCount)
