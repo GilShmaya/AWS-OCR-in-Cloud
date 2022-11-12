@@ -38,6 +38,7 @@ public class SQS {
 
         sqsClient.createQueue(createQueueRequest);
         requestQueueURL();
+        System.out.printf("Successfully started SQS Instance with url %s", url);
     }
 
     public void remove(){
