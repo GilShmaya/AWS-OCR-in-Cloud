@@ -56,7 +56,7 @@ public class EC2 {
         return instanceId;
     }
 
-    public void Terminate() {
+    public void terminate() {
         try {
             TerminateInstancesRequest TerminateRequest = TerminateInstancesRequest.builder()
                     .instanceIds(instanceId)
@@ -68,7 +68,7 @@ public class EC2 {
         }
     }
 
-    public void Terminate(String instanceId){
+    public void terminate(String instanceId){
         try {
             TerminateInstancesRequest TerminateRequest = TerminateInstancesRequest.builder()
                     .instanceIds(instanceId)
