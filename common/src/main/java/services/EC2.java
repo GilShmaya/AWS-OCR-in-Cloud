@@ -11,7 +11,7 @@ public class EC2 {
     private String ec2Name;
     private String instanceId;
 
-    public EC2(String ec2Name, int minCount, int maxCount, String date) {
+    public EC2(String ec2Name, int minCount, int maxCount, String userData) {
         this.ec2Name = ec2Name;
         ec2Client = Ec2Client.builder().build();
 
@@ -25,7 +25,7 @@ public class EC2 {
                 .iamInstanceProfile(IAM_role)
                 .maxCount(maxCount)
                 .minCount(minCount)
-                .userData(Base64.getEncoder().encodeToString(date.getBytes()))
+                .userData(Base64.getEncoder().encodeToString(userData.getBytes()))
                 .build();
 
         RunInstancesResponse response = ec2Client.runInstances(request);
