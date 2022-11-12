@@ -70,7 +70,7 @@ public class LocalApplication {
 
     private static String uploadFileToS3(String inputFilePath) {
         s3.createBucket();
-        return s3.putObject(inputFilePath, s3.getBucket());
+        return s3.putObject(inputFilePath, s3.getBucket(), "");
     }
 
     private static boolean isDoneMessage() {

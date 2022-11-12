@@ -48,10 +48,11 @@ public class S3 {
         s3Client.deleteBucket(request);
     }
 
-    public String putObject(String path, String bucket) {
-        String key = "";
+    public String putObject(String path, String bucket, String key) {
         try {
-            key = "key" + System.currentTimeMillis();
+            if (key == "") {
+                key = "key" + System.currentTimeMillis();
+            }
             PutObjectResponse response = s3Client.putObject(PutObjectRequest.builder()
                             .bucket(bucket)
                             .key(key)

@@ -1,6 +1,9 @@
 package services;
 
-import java.io.File;
+import software.amazon.awssdk.core.ResponseBytes;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+
+import java.io.*;
 import java.util.LinkedList;
 
 public class DataBase {
@@ -126,7 +129,7 @@ public class DataBase {
                 } catch (IOException ioe) {
                     System.err.println("IOException: " + ioe.getMessage());
                 }
-                s3.PutObject(path1, bucket, "SummaryFile.txt");
+                s3.putObject(path1, bucket, "SummaryFile.txt");
                 summaryFilein2.delete();
             } else {
                 try {
@@ -136,7 +139,7 @@ public class DataBase {
                 } catch (IOException ioe) {
                     System.err.println("IOException: " + ioe.getMessage());
                 }
-                s3.PutObject(path, bucket, "SummaryFile.txt");
+                s3.putObject(path, bucket, "SummaryFile.txt");
                 summaryFilein.delete();
             }
 
@@ -184,7 +187,7 @@ public class DataBase {
                 outputStreamOCR.flush();
                 outputStreamOCR.close();
                 System.out.println("*** uploading OCRfile back to S3 ***\n");
-                s3.PutObject(OCRFilePath, bucket, "OCRFile.txt");
+                s3.putObject(OCRFilePath, bucket, "OCRFile.txt");
                 OCRFile.delete();
                 return false;
             }
