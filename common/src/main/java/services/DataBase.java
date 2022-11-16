@@ -5,8 +5,9 @@ import java.util.LinkedList;
 
 public class DataBase {
     private static final String WORKER_DATA = ""; // TODO!
-    private String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/SummaryFile.txt";
-    private String OCR_FILE_PATH = System.getProperty("user.dir") + "/OCRFile.txt";
+    private String USER_DIR_PROPERTY = System.getProperty("user.dir");
+    private String SUMMARY_FILE_PATH = USER_DIR_PROPERTY + "/SummaryFile.txt";
+    private String OCR_FILE_PATH = USER_DIR_PROPERTY + "/OCRFile.txt";
     private S3 s3;
     private LinkedList<EC2> workersList;
     private int workersAmount;
@@ -80,46 +81,58 @@ public class DataBase {
         tasksAmount--;
     }
 
-    public boolean SetTaskImg(String summaryFileContext, String bucketName) throws IOException {
-        //write res to the summaryFile
-        System.out.println("*** before writing the result to summary file ***\n");
-        boolean isOk = SetImgResult(summaryFileContext, bucketName);
-        if (isOk) {
-            System.out.println("**** after writing the rusult to summary file *** \n");
-
-            System.out.println("*** getting the OCRFile from S3 ***\n");
-            File OCRFilein = writeS3ObjectToFile(OCR_FILE_PATH, "OCRFile.txt", bucketName);
-
-            System.out.println("*** reading the OCRFile from the computer***\n");
-            //check how many urls there are left 0-return true else- false
-            BufferedReader reader = new BufferedReader(new FileReader(OCRFilein));
+    public boolean handleOneResult(String summaryFileLineContext, String bucketName) throws IOException {
+        // write the OCR result (url + images' text)  to the summary file
+        if (writeLineToS3Object(summaryFileLineContext, bucketName)) { // writing succeed
+            // get the OCRFile from S3 after adding the new line
+            File OCRFile = writeS3ObjectToFile(OCR_FILE_PATH, "OCRFile.txt", bucketName);
+            // update OCR file
+            BufferedReader readerOCRFile = new BufferedReader(new FileReader(OCRFile));
             String line = null;
             try {
-                line = reader.readLine();
+                line = readerOCRFile.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            OCRFilein.delete();
             assert line != null;
             int count = Integer.parseInt(line);
             count--;
-            System.out.println("*** the number of images left is: " + count + " ***\n");
+            System.out.println("There are " + count + " number of images left");
+            OCRFile.delete();
             if (count == 0) {
                 return true;
-            } else {
-                //put a new file to s3, with the new number
-                System.out.println("*** writing the number of images left to a file ***\n");
-                File OCRFile = new File(OCR_FILE_PATH);
-                OutputStream outputStreamOCR = new FileOutputStream(OCRFile);
-                byte[] dataC = Integer.toString(count).getBytes();
-                outputStreamOCR.write(dataC);
+            } else { // upload a new OCR file in s3 that include the number of the images left
+                File OCRFileNew = new File(OCR_FILE_PATH);
+                OutputStream outputStreamOCR = new FileOutputStream(OCRFileNew);
+                byte[] countBytes = Integer.toString(count).getBytes();
+                outputStreamOCR.write(countBytes);
                 outputStreamOCR.flush();
                 outputStreamOCR.close();
-                System.out.println("*** uploading OCRfile back to S3 ***\n");
                 s3.putObject(OCR_FILE_PATH, bucketName, "OCRFile.txt");
-                OCRFile.delete();
+                OCRFileNew.delete();
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean writeLineToS3Object(String summaryFileLineContext,
+                                       String bucketName) { // TODO: check if summaryFilein2is needed
+        try {
+            File summaryFile = writeS3ObjectToFile(SUMMARY_FILE_PATH, "SummaryFile.txt", bucketName);
+            BufferedReader reader = new BufferedReader(new FileReader(summaryFile));
+            String line = reader.readLine();
+            if (line.startsWith("nothing yet")) { // no result was written yet, this is the first result.
+                summaryFile.delete();
+            }
+            FileWriter fileWriter = new FileWriter(summaryFile.getName(), true);
+            fileWriter.write(summaryFileLineContext);
+            fileWriter.close();
+            s3.putObject(SUMMARY_FILE_PATH, bucketName, "SummaryFile.txt");
+            summaryFile.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
         return true;
     }
@@ -137,84 +150,5 @@ public class DataBase {
             e.printStackTrace();
         }
         return file;
-    }
-
-    public boolean SetImgResult(String res, String bucketName) {
-        try {
-            File summaryFile = writeS3ObjectToFile(SUMMARY_FILE_PATH, "SummaryFile.txt", bucketName);
-            BufferedReader reader = new BufferedReader(new FileReader(summaryFile));
-            String line = reader.readLine();
-            if (line.startsWith("nothing yet")) {
-                summaryFile.delete();
-                File summaryFilein2 = new File(SUMMARY_FILE_PATH);
-                FileWriter fw = new FileWriter(summaryFilein2.getName(), true);
-                fw.write(res);
-                fw.close();
-                s3.putObject(SUMMARY_FILE_PATH, bucketName, "SummaryFile.txt");
-                summaryFilein2.delete();
-            } else {
-                FileWriter fw = new FileWriter(summaryFile.getName(), true);
-                fw.write(res);
-                fw.close();
-                s3.putObject(SUMMARY_FILE_PATH, bucketName, "SummaryFile.txt");
-                summaryFile.delete();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean SetImgResult(String res, String bucket) throws IOException {
-        String path = System.getProperty("user.dir") + "/SummaryFile.txt";
-        boolean flag= true;
-        File summaryFilein= null;
-        try{
-            summaryFilein= getObjectS3(path, "SummaryFile.txt",bucket);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            flag= false;
-        }
-        if (flag) {
-            BufferedReader reader = new BufferedReader(new FileReader(summaryFilein));
-            String line = null;
-            try {
-                line = reader.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if ((line.length() >= 11) && (line.equals("nothing yet"))) {
-                summaryFilein.delete();
-                String path1 = System.getProperty("user.dir") + "/SummaryFile.txt";
-                File summaryFilein2 = new File(path1);
-                try {
-                    FileWriter fw = new FileWriter(summaryFilein2.getName(), true); //the true will append the result
-                    fw.write(res);
-                    fw.close();
-                } catch (IOException ioe) {
-                    System.err.println("IOException: " + ioe.getMessage());
-                }
-                s3.PutObject(path1, bucket, "SummaryFile.txt");
-                summaryFilein2.delete();
-            } else {
-                try {
-                    FileWriter fw = new FileWriter(summaryFilein.getName(), true); //the true will append the result
-                    fw.write(res);
-                    fw.close();
-                } catch (IOException ioe) {
-                    System.err.println("IOException: " + ioe.getMessage());
-                }
-                s3.PutObject(path, bucket, "SummaryFile.txt");
-                summaryFilein.delete();
-            }
-
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 }
