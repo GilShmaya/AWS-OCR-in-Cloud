@@ -21,12 +21,6 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/net.sourceforge.javaocr/javaocr-core -->
-        <dependency>
-            <groupId>net.sourceforge.javaocr</groupId>
-            <artifactId>javaocr-core</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ec2</artifactId>

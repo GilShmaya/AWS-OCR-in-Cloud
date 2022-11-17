@@ -42,7 +42,7 @@ public class SQS {
     }
 
     public void remove(){
-        if ( isActive()) {
+        if (isActive()) {
             DeleteQueueRequest request = DeleteQueueRequest.builder()
                     .queueUrl(url)
                     .build();

@@ -15,6 +15,7 @@ public class EC2 {
         ec2Client = Ec2Client.builder().build();
     }
 
+
     public EC2(String ec2Name, int minCount, int maxCount, String userData) {
         this.ec2Name = ec2Name;
         ec2Client = Ec2Client.builder().build();
