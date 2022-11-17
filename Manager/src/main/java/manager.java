@@ -1,8 +1,6 @@
 import services.S3;
 import services.SQS;
-import software.amazon.awssdk.services.ec2.model.*;
 
-import java.util.LinkedList;
 public class manager {
 
     private static Thread MainAppThread;
