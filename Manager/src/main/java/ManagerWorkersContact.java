@@ -38,9 +38,9 @@ public class ManagerWorkersContact implements Runnable {
     public void readMsg() throws IOException {
         List<Message> nextMsg= managerToWorkersQ.getMessages();
         if (!nextMsg.isEmpty()){
-            for (Message msg : nextMsg){
-                // System.out.println("*** another message arrived in WorkersManagerSQS ***"); //todo : check if necessary
-                if ((msg.body().substring(0,6)).equals("Finish")){ //"Finish "+ name+ " " + bucket+" " + localSQS+ " "+ thisURL+ " "+text
+            for (Message msg : nextMsg) {
+                System.out.println("--- A new message from the manager is waiting ---");
+                if ((msg.body().substring(0,6)).equals("Finish")){
                     String [] msgToString = msg.body().substring(7).split(" ");
 
                     if(msgToString.length > 3) { //message contain all necessary information
@@ -54,13 +54,14 @@ public class ManagerWorkersContact implements Runnable {
                         // & send it to 'SetTaskImg' function, together with the local app's bucket.
                         processText(key, thisURL, bucket, localSQS, msg);
                     }
-                    else { //missing necessary information of the message
-                        System.out.println("missing necessary information");
+                    else {
+                        System.out.println("missing necessary information in order to do the task");
                         System.exit(1);
                     }
                 }
             }
-            managerToWorkersQ.deleteMessages(nextMsg); // when finished processing the current message
+            // Remove the processed message from the SQS queue
+            managerToWorkersQ.deleteMessages(nextMsg);
         }
     }
 
@@ -68,7 +69,7 @@ public class ManagerWorkersContact implements Runnable {
         try {
             managerToWorkersQ = new SQS("managerToWorkersQ");
             managerToWorkersQ.requestQueueURL();
-            while(!finish) { // endless loop until a termination message is coming
+            while(!finish) { // Until a termination message is sent by the manager
                 readMsg();
             }
         } catch (IOException exception) {

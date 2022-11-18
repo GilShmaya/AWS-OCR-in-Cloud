@@ -7,9 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Worker" />
-        <module name="LocalAplication" />
-        <module name="Manager" />
         <module name="common" />
+        <module name="LocalAplication" />
         <module name="manager" />
       </profile>
     </annotationProcessing>

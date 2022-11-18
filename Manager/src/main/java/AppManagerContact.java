@@ -34,30 +34,6 @@ public class AppManagerContact implements Runnable {
         return ((int) (Math.ceil((double) countMsg / n)-DB.getWorkersAmount()));
     }
 
-    // splits the main task to messages (according to the lines),
-    // sends the messages to the workers queue & count the number of messages
-    public int splitTask (File InputFile, String Task_key, String bucket, String LocalQueue) throws FileNotFoundException {
-        int counter=0;
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(InputFile)); // read the file
-            String line = reader.readLine();
-            while (line != null){
-                String [] Line= line.split("\n"); //TODO:check!
-                //example: Task_24.11.20..._Queue_1 http:... bucket24.11...
-                String msg = Task_key+"_"+counter+" "+Line[0]+" "+bucket+ " "+ LocalQueue;
-                ManagerAndWorkersQ.send(msg);
-                line = reader.readLine();
-                counter++;
-            }
-            reader.close();
-        }
-        catch (IOException e){
-            System.out.println("Problem in function: splitTask"); //TODO: check if necessary
-            e.printStackTrace();
-        }
-        return counter;
-    }
-
     //count number of urls
     public Integer numOfURLs (File InputFile){
         int counter= 0;
@@ -77,21 +53,21 @@ public class AppManagerContact implements Runnable {
         return counter;
     }
 
-
     public File fileFromS3 (String name, String key, String bucket) throws IOException {
-        ResponseBytes<GetObjectResponse> response= s3.getObjectBytes(key,bucket);
-        byte [] objectData= response.asByteArray();
+
+        ResponseBytes<GetObjectResponse> s3File= s3.getObjectBytes(key,bucket);
+        byte [] data= s3File.asByteArray();
         String path= System.getProperty("user.dir")+"/"+name+".txt";
         File Input= new File(path);
         OutputStream outputStream= new FileOutputStream(Input);
-        outputStream.write(objectData);
+        outputStream.write(data);
         outputStream.flush();
         outputStream.close();
         return Input;
     }
 
 
-    public void resFile (String name, String bucket) throws IOException {
+    public void resultFile (String name, String bucket) throws IOException {
         String ansFilePath= System.getProperty("user.dir")+"/SummaryFile.txt";
         File ansFile= new File (ansFilePath);
         OutputStream outputStream= new FileOutputStream(ansFile);
@@ -99,35 +75,59 @@ public class AppManagerContact implements Runnable {
         outputStream.write(data);
         outputStream.flush();
         outputStream.close();
-        System.out.println("*** put the not really empty summary file in S3 ***\n"); //TODO : WHAT???
         s3.putObject(ansFilePath, bucket, "SummaryFile.txt");
-        System.out.println("**** Add Task: "+name+" *****"); //TODO: CHECK IF NECESSARY
+        System.out.println("--- Add Task: "+name+" ---"); //TODO: CHECK IF NECESSARY
         ansFile.delete(); //delete the file after we finished with it (scalability)
     }
 
 
-
     public void OCRfile(File input, String bucket) throws IOException {
+
+        // first write in a new file the number of urls
         Integer NumOfURL= numOfURLs(input);
         String PathOCR= System.getProperty("user.dir")+"/OCRFile.txt";
         File OCR= new File (PathOCR);
         OutputStream outputStreamOCR= new FileOutputStream(OCR);
-        System.out.println("*** UrlNum: "+ NumOfURL.toString()+" ***"); //TODO : check if necessary
         byte [] urls= NumOfURL.toString().getBytes();
         outputStreamOCR.write(urls);
         outputStreamOCR.flush();
         outputStreamOCR.close();
-        System.out.println("*** put the OCRfile with the number of URLs in S3 ***\n"); //TODO : check if necessary
+
+        //set the file of the url number to the bucket of the local application
         s3.putObject(PathOCR, bucket, "OCRFile.txt");
-        OCR.delete(); //delete the file after we finished with it (scalability)
+        OCR.delete(); //delete the file after we finished with it (scalability) // todo
     }
+
+
+    // Creates an SQS message for each URL in the input file together with the operation
+    //that should be performed on it
+    public int splitAndSendTask (File InputFile, String Task_key, String bucket, String LocalQueue) throws FileNotFoundException {
+        int counter=0;
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(InputFile));
+            String line = reader.readLine();
+            while (line != null) { // there are more tasks to process
+                String [] Line= line.split("\n");
+                String msg = Task_key+"_"+counter+" "+Line[0]+" "+bucket+ " "+ LocalQueue;
+                ManagerAndWorkersQ.send(msg);
+                line = reader.readLine();
+                counter++;
+            }
+            reader.close();
+        }
+        catch (IOException exception){
+            System.out.println("Something is wrong with function: splitAndSendTask");
+            exception.printStackTrace();
+        }
+        return counter;
+    }
+
 
     // delete the task from s3 after reading and analyzed it
     // delete the inputFile we got from s3
     // delete the message from ManagerAndAppQ after sending it to the workers
     public void finishWithTask (String key, String name, String bucket, Message msg, File input) {
         s3.deleteObject(key,bucket);
-        System.out.println("**** Deleting the task: "+ name+ " Key: "+key+ " from bucket: "+ bucket +" ****");
         input.delete();
         DB.addTask();
         List<Message> delete= new LinkedList<Message>();
@@ -136,59 +136,64 @@ public class AppManagerContact implements Runnable {
     }
 
 
-    public void NewMsgFromApp (Message msg) throws IOException {
+    public void newTaskFromApp (Message msg) throws IOException {
         if(!terminate) {
-            System.out.println("***** IN NEW TASK *****\n"); //TODO: check if necessary
+            System.out.println("---Processing New Task---\n");
 
-            //get the information about the new message
-            String str= msg.body().substring(8); //FileKey + " " + n + " " + s3.getBucket() + " " + QueueName
-            String[] splitted = str.split(" ");
-            if (splitted.length != 4) {
-                System.out.println("The Data should contain file key, n, bucket name, queue");
+            // starting with reading the message
+            String str= msg.body().substring(8);
+            String[] split = str.split(" ");
+            if (split.length != 4) {
+                System.out.println("missing necessary data");
                 System.exit(1);
             }
-            String TaskName = "Task" + new Date().getTime(); //TODO: what does the getTime means?
-            String key = splitted[0];
-            int n = Integer.parseInt(splitted[1]);
-            String bucket= splitted[2];
-            String LocalQueue= splitted[3];
+            String TaskName = "Task" + new Date().getTime();
+            String key = split[0];
+            int n = Integer.parseInt(split[1]);
+            String bucket= split[2];
+            String LocalQueue= split[3];
 
-            File ourFile = fileFromS3(TaskName, key, bucket); //get the inputFile from s3
+            File ourFile = fileFromS3(TaskName, key, bucket); //Downloads the input file from S3
             OCRfile(ourFile, bucket); // creating an OCR file with the number of urls in the input message & sending it to s3
-            resFile(TaskName, bucket); // creating an empty file for the worker's results
+            resultFile(TaskName, bucket); // creating an empty file for the worker's results
 
-            //activate the workers for this task
-            System.out.println("*** now activate the workers if needed *** \n"); //TODO : CHECK IF NECESSARY
+
+            // Checks how many workers are necessary for the new task and update it in dataBase
             int numOfWorkers = workersForTask(numOfURLs(ourFile),n);
             DB.addAmountOfWorkers(numOfWorkers);
 
-            // starting the thread only if it's the beginning of the process //TODO : CHECK IF true
+            // starting the thread only if it's the beginning of the process
             if (count==0){
                 count++;
                 WorkerActionThread.start();
             }
-            System.out.println("*** send the tasks to the workers *** \n"); //TODO : CHECK IF NECESSARY
-            Integer splittingTasks = splitTask(ourFile, TaskName, bucket, LocalQueue);
+
+            // Starts Worker processes (nodes) according to the necessary amount
+            System.out.println("--- Now send the tasks to the workers --- \n");
+            Integer splittingTasks = splitAndSendTask(ourFile, TaskName, bucket, LocalQueue);
+
+
             finishWithTask(key, TaskName, bucket, msg, ourFile);
         }
     }
 
 
-
+    // The Manager checks a special SQS queue for messages from local applications.
     public void CheckingMsgFromApp() throws InterruptedException, IOException {
         List<Message> messages= ManagerAndAppQ.getMessages();
         if (!messages.isEmpty()){
-            System.out.println("*** A new Message is waiting in ManagerAndAppQ ***");
+            System.out.println(" --- A new message from local application is waiting ---");
+            // Once it receives a message he reads it and checks if it's a termination msg or a new task msg
             for (Message msg : messages){
-                System.out.println("*** The message arrived from app is: "+msg.body()+" ***\n"); //todo : is it necessary?
+                System.out.println("--- The new message is: "+msg.body()+" ---\n");
                 String shouldTerminate = msg.body().substring(0,9);
-                String task = msg.body().substring(0,7);
+                String newTask = msg.body().substring(0,7);
                 if(shouldTerminate.equals("Terminate")) {
                     Terminate();
                     return;
                 }
-                else if(task.equals("NewTask")){
-                    NewMsgFromApp(msg);
+                else if(newTask.equals("NewTask")){
+                    newTaskFromApp(msg);
                 }
             }
         }
@@ -205,20 +210,21 @@ public class AppManagerContact implements Runnable {
     }
 
     public void Terminate() throws InterruptedException {
-        terminate=true;
-        // System.out.println("*** Waiting for all tasks to finish ***"); // TODO: necessary?
-        while(DB.getTasksAmount()>0){ // there are more tasks to process
+
+        System.out.println("--- Waiting for all activates workers to finish and then terminate --- ");
+        terminate=true; // Does not accept any more input files from local applications.
+        while(DB.getTasksAmount()>0){ // Waits for all the workers to finish their job, and then terminates them.
             try {
-                TimeUnit.SECONDS.sleep(45); // todo : why 45?
+                TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }
         }
-        System.out.println("*** All tasks are finished ***"); // TODO: necessary?
+        System.out.println("--- All workers finished their job ---");
         WorkerActionThread.interrupt();
         terminateWorkers();
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // 4. terminate the locals to manager sqs
+
+        // Terminate the local application to manager SQS
         ManagerAndAppQ.remove();
         ManagerAndWorkersQ.remove();
         SQS WorkersManagerSQS = new SQS("WorkersManagerSQS");
@@ -242,7 +248,6 @@ public class AppManagerContact implements Runnable {
             System.out.println(e.awsErrorDetails().errorMessage());
         }
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     public void run() {
