@@ -64,52 +64,6 @@ public class S3 {
         return key;
     }
 
-    private static void multipartUpload(String bucketName, String key) {
-        // First create a multipart upload and get the upload id
-        CreateMultipartUploadRequest createMultipartUploadRequest = CreateMultipartUploadRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
-
-        CreateMultipartUploadResponse response = s3Client.createMultipartUpload(createMultipartUploadRequest);
-        String uploadId = response.uploadId();
-        System.out.println(uploadId);
-
-        // Upload all the different parts of the object
-        UploadPartRequest uploadPartRequest1 = UploadPartRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .uploadId(uploadId)
-                .partNumber(1).build();
-
-        String etag1 =
-                s3Client.uploadPart(uploadPartRequest1, RequestBody.fromByteBuffer(getRandomByteBuffer(5 * mB))).eTag();
-
-        CompletedPart part1 = CompletedPart.builder().partNumber(1).eTag(etag1).build();
-
-        UploadPartRequest uploadPartRequest2 = UploadPartRequest.builder().bucket(bucketName).key(key)
-                .uploadId(uploadId)
-                .partNumber(2).build();
-        String etag2 =
-                s3Client.uploadPart(uploadPartRequest2, RequestBody.fromByteBuffer(getRandomByteBuffer(3 * mB))).eTag();
-        CompletedPart part2 = CompletedPart.builder().partNumber(2).eTag(etag2).build();
-
-        // Finally call completeMultipartUpload operation to tell S3 to merge all uploaded
-        // parts and finish the multipart operation.
-        CompletedMultipartUpload completedMultipartUpload = CompletedMultipartUpload.builder()
-                .parts(part1, part2)
-                .build();
-
-        CompleteMultipartUploadRequest completeMultipartUploadRequest =
-                CompleteMultipartUploadRequest.builder()
-                        .bucket(bucketName)
-                        .key(key)
-                        .uploadId(uploadId)
-                        .multipartUpload(completedMultipartUpload)
-                        .build();
-
-        s3Client.completeMultipartUpload(completeMultipartUploadRequest);
-    }
 
     public void deleteObject(String key, String bucketName) {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
@@ -119,13 +73,6 @@ public class S3 {
         s3Client.deleteObject(deleteObjectRequest);
     }
 
-    public void deleteObject(String key) {
-        DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
-        s3Client.deleteObject(deleteObjectRequest);
-    }
 
     public synchronized ResponseBytes<GetObjectResponse> getObjectBytes(String key, String bucketName) {
         GetObjectRequest request = GetObjectRequest.builder()

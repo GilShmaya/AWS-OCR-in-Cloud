@@ -10,37 +10,30 @@ import java.util.concurrent.TimeUnit;
 public class workersThread implements Runnable{
     public void run() {
         EC2 ec2= new EC2();
-        DataBase DB= DataBase.getInstance();
+        DataBase dataBase= DataBase.getInstance();
         while(true) {
             try {
                 TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }
-            LinkedList<EC2> workers = DB.getWorkersList();
-            // System.out.println("*** workers list ****"); //todo: necessary?
+            LinkedList<EC2> workers = dataBase.getWorkersList();
             if (!workers.isEmpty()) {
-                for (EC2 oneWorker : workers) {
-                    // System.out.println("**********Start**************"); //todo: necessary?
-                    DescribeInstancesRequest request = DescribeInstancesRequest.builder().instanceIds(oneWorker.getInstanceId()).build();
-                    DescribeInstancesResponse result = ec2.getEC2Client().describeInstances(request);
-                    // System.out.println("*** finish res ***"); //todo: necessary?
-                    for (Reservation reservation : result.reservations()) {
+                for (EC2 worker : workers) {
+                    DescribeInstancesRequest ask = DescribeInstancesRequest.builder().instanceIds(worker.getInstanceId()).build();
+                    DescribeInstancesResponse ans = ec2.getEC2Client().describeInstances(ask);
+                    for (Reservation reservation : ans.reservations()) {
                         for (Instance instance : reservation.instances()) {
-                            if(instance.instanceId().equals(oneWorker.getInstanceId())) {
-                                //System.out.println("*** after fors ***"); //todo: necessary?
+                            if(instance.instanceId().equals(worker.getInstanceId())) {
                                 String state = instance.state().name().toString();
-                                // System.out.println("*** got the state ***"); //todo: necessary?
                                 if (state.equals("shutting-down") || state.equals("terminated") || state.equals("stopping") || state.equals("stopped")) {
-                                    System.out.println("**********Found**************");
-                                    DB.removeWorker(oneWorker); // todo : check method's name
-                                    DB.addAmountOfWorkers(1); //todo
+                                    dataBase.removeWorker(worker);
+                                    dataBase.addAmountOfWorkers(1);
                                     try {
                                         TimeUnit.SECONDS.sleep(45);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-                                    System.out.println("**********ADD**************");
                                 }
                             }
                         }
