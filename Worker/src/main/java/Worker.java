@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class worker {
+public class Worker {
 
     public static String processOCR (String url) throws IOException {
         String ans;

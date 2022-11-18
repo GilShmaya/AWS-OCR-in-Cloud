@@ -5,13 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="update pom.xml">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/inputExample.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/LocalAplication-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/manager-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/src/main/java/worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/Worker-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/classes/worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/classes/worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/S3.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/S3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,20 +89,21 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/Manager/src/main/java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.manager">
+  <component name="RunManager" selected="Application.Manager">
     <configuration name="LocalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LocalApplication" />
       <module name="LocalAplication" />
@@ -87,8 +111,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="manager" />
+    <configuration name="Manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Manager" />
       <module name="Manager" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -96,7 +120,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.manager" />
+        <item itemvalue="Application.Manager" />
         <item itemvalue="Application.LocalApplication" />
       </list>
     </recent_temporary>
@@ -113,7 +137,7 @@
       <workItem from="1668701043965" duration="84000" />
       <workItem from="1668703219036" duration="1035000" />
       <workItem from="1668704405911" duration="1487000" />
-      <workItem from="1668771966008" duration="2884000" />
+      <workItem from="1668771966008" duration="9934000" />
     </task>
     <task id="LOCAL-00001" summary="start writing LocalApplication">
       <created>1668110147849</created>
@@ -255,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668696464481</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="gitIgnore">
+      <created>1668788455311</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1668788455311</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +304,8 @@
     <MESSAGE value="add empty constructor to EC2" />
     <MESSAGE value="implement DataBase" />
     <MESSAGE value="update pom.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pom.xml" />
+    <MESSAGE value="gitIgnore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitIgnore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -285,6 +317,11 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Manager/src/main/java/Manager.java</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

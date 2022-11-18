@@ -252,7 +252,7 @@ public class AppManagerContact implements Runnable {
 
     public void run() {
         try {
-            ManagerAndAppQ = new SQS("ManagerAndAppQ");
+            ManagerAndAppQ = new SQS("localToManagerSQS");
             ManagerAndAppQ.requestQueueURL();
             workersThread tw= new workersThread();
             WorkerActionThread = new Thread(tw);

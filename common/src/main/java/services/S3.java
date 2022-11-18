@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class S3 {
     private static final int  mB = 1024 * 1024;
-    private static final Region REGION = Region.US_EAST_1; // TODO: check the region
+    private static final Region REGION = Region.US_EAST_1;
     private static S3Client s3Client;
     private static String bucketName;
 

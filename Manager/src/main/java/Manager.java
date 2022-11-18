@@ -1,7 +1,7 @@
 import services.S3;
 import services.SQS;
 
-public class manager {
+public class Manager {
 
     private static Thread MainAppThread;
     private static Thread WorkersThread;
@@ -10,11 +10,11 @@ public class manager {
 
         S3 s3 = new S3();
 
-        SQS ManagerToWorkers = new SQS("ManagerToWorker" );
+        SQS ManagerToWorkers = new SQS("managerToWorkersQ" );
         ManagerToWorkers.create();
         AppManagerContact ContactWithApp =new AppManagerContact(s3,ManagerToWorkers);
 
-        SQS WorkersToManager = new SQS("WorkersToManager");
+        SQS WorkersToManager = new SQS("managerToWorkersQ");
         WorkersToManager.create();
         ManagerWorkersContact ContactWithWorkers= new ManagerWorkersContact(WorkersToManager);
 

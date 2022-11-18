@@ -10,6 +10,7 @@
         <module name="common" />
         <module name="LocalAplication" />
         <module name="manager" />
+        <module name="Manager" />
       </profile>
     </annotationProcessing>
   </component>
