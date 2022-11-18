@@ -76,7 +76,7 @@ public class AppManagerContact implements Runnable {
         outputStream.flush();
         outputStream.close();
         s3.putObject(ansFilePath, bucket, "SummaryFile.txt");
-        System.out.println("--- Add Task: "+name+" ---"); //TODO: CHECK IF NECESSARY
+        System.out.println("--- Add Task: "+name+" ---");
         ansFile.delete(); //delete the file after we finished with it (scalability)
     }
 
@@ -95,7 +95,7 @@ public class AppManagerContact implements Runnable {
 
         //set the file of the url number to the bucket of the local application
         s3.putObject(PathOCR, bucket, "OCRFile.txt");
-        OCR.delete(); //delete the file after we finished with it (scalability) // todo
+        OCR.delete();
     }
 
 
@@ -203,7 +203,7 @@ public class AppManagerContact implements Runnable {
     public void terminateWorkers () {
         EC2 worker = DB.assignWorker();
         while(worker!= null){
-            System.out.println("*** Terminates 1 worker ***"); // TODO: necessary?
+            System.out.println("--- Terminates 1 worker ---");
             worker.terminate();
             worker = DB.assignWorker();
         }
