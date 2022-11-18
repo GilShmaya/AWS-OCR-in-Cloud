@@ -19,19 +19,17 @@ public class LocalApplication {
     private static final String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
     private static final String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();
     private static final String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/src/summaryFile.txt";
-    private static String MANAGER_DATA = ""; // TODO!
+    private static final String MANAGER_DATA = ""; // TODO!
     private static final Logger logger = LoggerFactory.getLogger(LocalApplication.class);
-    private static String MANAGER_NAME = "manager";
-    private static String pathPrefix = System.getProperty("user.dir") + "/src/";
-    private static String inputFilePath;
+    private static final String MANAGER_NAME = "manager";
+    private static final String pathPrefix = System.getProperty("user.dir") + "/src/";
     private static File outputFile;
-    private static int numberOfFilesPerWorker;
     private static boolean terminate = false;
-    private static S3 s3 = new S3();
-    private static SQS localToManagerSQS = new SQS(LOCAL_TO_MANAGER_SQS_NAME);
-    private static SQS managerToLocalSQS = new SQS(MANAGER_TO_LOCAL_SQS_NAME);
+    private static final S3 s3 = new S3();
+    private static final SQS localToManagerSQS = new SQS(LOCAL_TO_MANAGER_SQS_NAME);
+    private static final SQS managerToLocalSQS = new SQS(MANAGER_TO_LOCAL_SQS_NAME);
     private static String doneMessage;
-    private static List<Message> messagesList = new LinkedList<Message>();
+    private static final List<Message> messagesList = new LinkedList<Message>();
 
 
     private static void createManager() {
@@ -138,9 +136,9 @@ public class LocalApplication {
             if (args.length == 4) {
                 terminate = true; // TODO: which value should be here? should we check this?
             }
-            inputFilePath = pathPrefix + args[0];
+            String inputFilePath = pathPrefix + args[0];
             outputFile = new File(pathPrefix + args[1]);
-            numberOfFilesPerWorker = Integer.parseInt(args[2]);
+            int numberOfFilesPerWorker = Integer.parseInt(args[2]);
 
             createManager();
             String bucketLocation = uploadFileToS3(inputFilePath);
