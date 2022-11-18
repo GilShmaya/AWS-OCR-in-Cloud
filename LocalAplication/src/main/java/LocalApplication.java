@@ -4,6 +4,7 @@ import services.EC2;
 import services.S3;
 import services.SQS;
 import software.amazon.awssdk.core.ResponseBytes;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ec2.Ec2Client;
 import software.amazon.awssdk.services.ec2.model.*;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
@@ -16,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LocalApplication {
+    private static final software.amazon.awssdk.regions.Region REGION = Region.US_EAST_1;
     private static final String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
     private static final String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();
     private static final String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/src/summaryFile.txt";
@@ -33,7 +35,7 @@ public class LocalApplication {
 
 
     private static void createManager() {
-        Ec2Client ec2Client = Ec2Client.builder().build();
+        Ec2Client ec2Client = Ec2Client.builder().region(REGION).build();
         if (isActive(ec2Client, MANAGER_NAME)) {
             // if the manager is already exist - request the url of the shared queue to the manager
             localToManagerSQS.requestQueueURL();
@@ -52,7 +54,7 @@ public class LocalApplication {
                     ec2Client.describeInstances(DescribeInstancesRequest.builder().build()); // request EC2 instances
             for (Reservation reservation : response.reservations()) {
                 for (Instance instance : reservation.instances()) {
-                    String name = instance.tags().get(0).value();
+                    String name = !instance.tags().isEmpty() ? instance.tags().get(0).value() : "";
                     String state = instance.state().name().toString();
                     if (name.equals(nodeName) && (state.equals("pending") || state.equals("running"))) {
                         return true;
@@ -61,8 +63,7 @@ public class LocalApplication {
             }
             return false;
         } catch (Ec2Exception e) {
-            logger.error("An error occurred while checking if " + nodeName + " is active.",
-                    e.awsErrorDetails().errorMessage());
+            logger.error("An error occurred while checking if " + nodeName + " is active.", e);
             return false;
         }
     }

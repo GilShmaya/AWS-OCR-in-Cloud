@@ -17,8 +17,8 @@ public class S3 {
     private static String bucketName;
 
     public S3() {
-        this.s3Client = S3Client.builder().region(REGION).build();
-        this.bucketName = "bucket" + System.currentTimeMillis();
+        s3Client = S3Client.builder().region(REGION).build();
+        bucketName = "bucket" + System.currentTimeMillis();
     }
 
     private static ByteBuffer getRandomByteBuffer(int size) {
@@ -38,7 +38,7 @@ public class S3 {
                 .acl(BucketCannedACL.PUBLIC_READ)
                 .createBucketConfiguration(CreateBucketConfiguration.builder().build())
                 .build());
-        System.out.printf("Successfully created a bucket Instance in S3 with name %s", bucketName);
+        System.out.println("Successfully created a bucket Instance in S3 with name " + bucketName);
     }
 
     public void deleteBucket(String bucketName) {
