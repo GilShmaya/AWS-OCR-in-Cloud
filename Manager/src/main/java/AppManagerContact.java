@@ -47,9 +47,9 @@ public class AppManagerContact implements Runnable {
             reader.close();
         }
         catch (IOException e){
-            System.out.println("Problem in function: numOfURLs"); //TODO: check if necessary
             e.printStackTrace();
         }
+        System.out.println("There are: "+counter+ "URLs in the file");
         return counter;
     }
 
@@ -88,11 +88,12 @@ public class AppManagerContact implements Runnable {
         String PathOCR= System.getProperty("user.dir")+"/OCRFile.txt";
         File OCR= new File (PathOCR);
         OutputStream outputStreamOCR= new FileOutputStream(OCR);
+        System.out.println(" --- Image count :" + NumOfURL.toString()+" ---");
         byte [] urls= NumOfURL.toString().getBytes();
         outputStreamOCR.write(urls);
         outputStreamOCR.flush();
         outputStreamOCR.close();
-
+        System.out.println(" --- put the OCR file with the number of URLs in S3 ---\n");
         //set the file of the url number to the bucket of the local application
         s3.putObject(PathOCR, bucket, "OCRFile.txt");
         OCR.delete();
@@ -127,6 +128,7 @@ public class AppManagerContact implements Runnable {
     // delete the inputFile we got from s3
     // delete the message from ManagerAndAppQ after sending it to the workers
     public void finishWithTask (String key, String name, String bucket, Message msg, File input) {
+        System.out.println("--- Deleting task: "+ name+ " Key: "+key+ " from bucket: "+ bucket +" ---");
         s3.deleteObject(key,bucket);
         input.delete();
         DB.addTask();
@@ -141,17 +143,17 @@ public class AppManagerContact implements Runnable {
             System.out.println("---Processing New Task---\n");
 
             // starting with reading the message
-            String str= msg.body().substring(8);
+            String str= msg.body();
             String[] split = str.split(" ");
-            if (split.length != 4) {
+            if (split.length != 5) {
                 System.out.println("missing necessary data");
                 System.exit(1);
             }
             String TaskName = "Task" + new Date().getTime();
-            String key = split[0];
-            int n = Integer.parseInt(split[1]);
-            String bucket= split[2];
-            String LocalQueue= split[3];
+            String key = split[3];
+            int n = Integer.parseInt(split[2]);
+            String bucket= split[4];
+            String LocalQueue= split[1];
 
             File ourFile = fileFromS3(TaskName, key, bucket); //Downloads the input file from S3
             OCRfile(ourFile, bucket); // creating an OCR file with the number of urls in the input message & sending it to s3
@@ -172,7 +174,6 @@ public class AppManagerContact implements Runnable {
             System.out.println("--- Now send the tasks to the workers --- \n");
             Integer splittingTasks = splitAndSendTask(ourFile, TaskName, bucket, LocalQueue);
 
-
             finishWithTask(key, TaskName, bucket, msg, ourFile);
         }
     }
@@ -186,13 +187,11 @@ public class AppManagerContact implements Runnable {
             // Once it receives a message he reads it and checks if it's a termination msg or a new task msg
             for (Message msg : messages){
                 System.out.println("--- The new message is: "+msg.body()+" ---\n");
-                String shouldTerminate = msg.body().substring(0,9);
-                String newTask = msg.body().substring(0,7);
-                if(shouldTerminate.equals("Terminate")) {
+                if(msg.body().startsWith("Terminate")) {
                     Terminate();
                     return;
                 }
-                else if(newTask.equals("NewTask")){
+                else if(msg.body().startsWith("Task")){
                     newTaskFromApp(msg);
                 }
             }

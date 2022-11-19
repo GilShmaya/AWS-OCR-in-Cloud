@@ -39,6 +39,7 @@ public class Worker {
                 // todo : what is the l[0] above?
                 String task = msg.get(0).body();
                 String[] split = task.split(" ");
+                System.out.println(split);
                 if (split.length >= 3) { // all necessary information is available.
                     String name = split[0];
                     String url = split[1];

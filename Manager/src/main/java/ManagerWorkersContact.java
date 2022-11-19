@@ -39,7 +39,7 @@ public class ManagerWorkersContact implements Runnable {
         List<Message> nextMsg= managerToWorkersQ.getMessages();
         if (!nextMsg.isEmpty()){
             for (Message msg : nextMsg) {
-                System.out.println("--- A new message from the manager is waiting ---");
+                System.out.println("--- A new message from the manager to the workers is waiting ---");
                 if ((msg.body().substring(0,6)).equals("Finish")){
                     String [] msgToString = msg.body().substring(7).split(" ");
 
@@ -55,7 +55,7 @@ public class ManagerWorkersContact implements Runnable {
                         processText(key, thisURL, bucket, localSQS, msg);
                     }
                     else {
-                        System.out.println("missing necessary information in order to do the task");
+                        System.out.println("missing necessary information");
                         System.exit(1);
                     }
                 }

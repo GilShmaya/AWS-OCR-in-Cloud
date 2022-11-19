@@ -4,9 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
+    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="implement worker and manager part">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022__16_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022__16_02__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_11_2022__18_19__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/classes/worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/classes/worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +65,9 @@
     <option name="context" value="RS-2-EUW-Flink-AKS-gil-2" />
     <option name="namespace" value="default" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -57,19 +85,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="TF_FMT" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="go.formatter.settings.were.checked" value="true" />
-    <property name="go.import.settings.migrated" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -93,9 +117,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Manager (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Manager" />
-      <module name="Manager" />
+      <module name="manager" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -107,11 +136,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Manager (1)" />
+      <item itemvalue="Application.LocalApplication" />
+      <item itemvalue="Application.Manager" />
+      <item itemvalue="Application.Worker" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Worker" />
-        <item itemvalue="Application.Manager" />
+        <item itemvalue="Application.Manager (1)" />
         <item itemvalue="Application.LocalApplication" />
+        <item itemvalue="Application.Manager" />
       </list>
     </recent_temporary>
   </component>
@@ -340,6 +376,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start writing LocalApplication" />
     <MESSAGE value="start writing SQS" />
@@ -367,15 +414,10 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>jar://$MAVEN_REPOSITORY$/software/amazon/awssdk/sqs/2.18.6/sqs-2.18.6.jar!/software/amazon/awssdk/services/sqs/model/ReceiveMessageRequest.class</url>
           <line>405</line>
-          <properties class="software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest.Builder" method="maxNumberOfMessages">
+          <properties class="software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest.Builder">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Manager/src/main/java/Manager.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

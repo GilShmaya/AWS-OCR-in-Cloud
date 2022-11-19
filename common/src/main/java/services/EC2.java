@@ -14,7 +14,7 @@ public class EC2 {
     private String instanceId;
 
     public EC2() {
-        ec2Client = Ec2Client.builder().build();
+        ec2Client = Ec2Client.builder().region(REGION).build();
     }
 
 
@@ -48,7 +48,7 @@ public class EC2 {
                 .build();
         try {
             ec2Client.createTags(tagRequest);
-            System.out.printf("Successfully started EC2 Instance with name %s, ID %s based on AMI %s",
+            System.out.printf("Successfully started EC2 Instance with name %s, ID %s based on AMI %s\n",
                     ec2Name,
                     instanceId,
                     AMI_ID);
