@@ -13,7 +13,7 @@ public class EC2 {
     private String ec2Name;
     private String instanceId;
 
-    public EC2(){
+    public EC2() {
         ec2Client = Ec2Client.builder().build();
     }
 
@@ -48,7 +48,10 @@ public class EC2 {
                 .build();
         try {
             ec2Client.createTags(tagRequest);
-            System.out.printf("Successfully started EC2 Instance %s based on AMI %s", instanceId, AMI_ID);
+            System.out.printf("Successfully started EC2 Instance with name %s, ID %s based on AMI %s",
+                    ec2Name,
+                    instanceId,
+                    AMI_ID);
         } catch (Ec2Exception e) {
             System.err.println(e.awsErrorDetails().errorMessage());
             System.exit(1);
@@ -75,14 +78,14 @@ public class EC2 {
         }
     }
 
-    public void terminate(String instanceId){
+    public void terminate(String instanceId) {
         try {
             TerminateInstancesRequest TerminateRequest = TerminateInstancesRequest.builder()
                     .instanceIds(instanceId)
                     .build();
             ec2Client.terminateInstances(TerminateRequest);
             System.out.printf("Successfully terminated EC2 Instance %s based on AMI %s", instanceId, AMI_ID);
-        }     catch (Ec2Exception e){
+        } catch (Ec2Exception e) {
             System.out.println(e.awsErrorDetails().errorMessage());
         }
     }

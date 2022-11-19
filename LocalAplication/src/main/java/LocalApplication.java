@@ -118,6 +118,8 @@ public class LocalApplication {
                     bufferedWriter.write("<p> " + line + "</p>");
                 }
             }
+            System.out.println("The summery file was created successfully.");
+
             bufferedWriter.close();
             bufferedReader.close();
 
@@ -135,7 +137,7 @@ public class LocalApplication {
             logger.error("Should be 3 arguments:  input file name, output file name and number of process files");
         } else {
             if (args.length == 4) {
-                terminate = true; // TODO: which value should be here? should we check this?
+                terminate = true;
             }
             String inputFilePath = pathPrefix + args[0];
             outputFile = new File(pathPrefix + args[1]);
@@ -151,6 +153,7 @@ public class LocalApplication {
             System.out.println("Sent message to manager, waiting for a response");
             while (!isDoneMessage()) {
             }
+            System.out.println("A response was received from the manager.");
             createHTMLSummaryFile(doneMessage);
 
             if (terminate)
