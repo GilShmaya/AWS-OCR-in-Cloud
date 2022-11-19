@@ -3,9 +3,6 @@ import services.SQS;
 
 public class Manager {
 
-    private static Thread MainAppThread;
-    private static Thread WorkersThread;
-
     public static void main(String[] args) throws InterruptedException {
 
         S3 s3 = new S3();
@@ -19,19 +16,19 @@ public class Manager {
         ManagerWorkersContact ContactWithWorkers= new ManagerWorkersContact(WorkersToManager);
 
 
-        MainAppThread= new Thread(ContactWithApp);
-        MainAppThread.start();
-        WorkersThread= new Thread(ContactWithWorkers);
-        WorkersThread.start();
+        Thread mainAppThread = new Thread(ContactWithApp);
+        mainAppThread.start();
+        Thread workersThread = new Thread(ContactWithWorkers);
+        workersThread.start();
 
         try{
-            MainAppThread.join();
+            mainAppThread.join();
         }
         catch(InterruptedException e){
             e.printStackTrace();
         }
         try{
-            WorkersThread.join();
+            workersThread.join();
         }
         catch(InterruptedException e){
             e.printStackTrace();
