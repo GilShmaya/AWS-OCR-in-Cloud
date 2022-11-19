@@ -7,8 +7,6 @@
     <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/SQS.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/SQS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +129,7 @@
       <workItem from="1668704405911" duration="1487000" />
       <workItem from="1668771966008" duration="17091000" />
       <workItem from="1668852040920" duration="668000" />
-      <workItem from="1668852756771" duration="5506000" />
+      <workItem from="1668852756771" duration="6680000" />
     </task>
     <task id="LOCAL-00001" summary="start writing LocalApplication">
       <created>1668110147849</created>
@@ -329,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668856940780</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="print messages about progress">
+      <created>1668858514953</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668858514953</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,7 +358,8 @@
     <MESSAGE value="fix pom" />
     <MESSAGE value="fix manager pom" />
     <MESSAGE value="debug worker" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug worker" />
+    <MESSAGE value="print messages about progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="print messages about progress" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

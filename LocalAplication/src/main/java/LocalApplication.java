@@ -146,7 +146,7 @@ public class LocalApplication {
             createManager();
             String bucketLocation = uploadFileToS3(inputFilePath);
             managerToLocalSQS.create();
-            managerToLocalSQS.send(
+            localToManagerSQS.send(
                     "Task " + MANAGER_TO_LOCAL_SQS_NAME + " " + numberOfFilesPerWorker + " " + bucketLocation + " " +
                             s3.getBucket());
 
