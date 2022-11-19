@@ -26,9 +26,9 @@ public class Worker {
     public static void main(String[] args) throws IOException {
         boolean doTerminate = false;
 
-        SQS managerGetFromWorkers  = new SQS("WorkersManagerSQS"); // SQS for the messages the workers send the manager.
+        SQS managerGetFromWorkers  = new SQS("workersToManagerQ"); // SQS for the messages the workers send the manager.
         managerGetFromWorkers.requestQueueURL();
-        SQS workersGetFromManager  = new SQS("ManagerWorkersSQS"); // SQS for the tasks the manager send to the workers
+        SQS workersGetFromManager  = new SQS("managerToWorkersQ"); // SQS for the tasks the manager send to the workers
         workersGetFromManager.requestQueueURL();
 
         while (!doTerminate) {

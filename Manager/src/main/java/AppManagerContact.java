@@ -227,7 +227,7 @@ public class AppManagerContact implements Runnable {
         // Terminate the local application to manager SQS
         ManagerAndAppQ.remove();
         ManagerAndWorkersQ.remove();
-        SQS WorkersManagerSQS = new SQS("WorkersManagerSQS");
+        SQS WorkersManagerSQS = new SQS("workersToManagerQ");
         WorkersManagerSQS.requestQueueURL();
         WorkersManagerSQS.remove();
         EC2 ec2= new EC2();

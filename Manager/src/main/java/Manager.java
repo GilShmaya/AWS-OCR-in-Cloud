@@ -11,7 +11,7 @@ public class Manager {
         ManagerToWorkers.create();
         AppManagerContact ContactWithApp =new AppManagerContact(s3,ManagerToWorkers);
 
-        SQS WorkersToManager = new SQS("managerToWorkersQ");
+        SQS WorkersToManager = new SQS("workersToManagerQ");
         WorkersToManager.create();
         ManagerWorkersContact ContactWithWorkers= new ManagerWorkersContact(WorkersToManager);
 
