@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/manager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/target/classes/worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/classes/worker.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +132,7 @@
       <workItem from="1668704405911" duration="1487000" />
       <workItem from="1668771966008" duration="17091000" />
       <workItem from="1668852040920" duration="668000" />
-      <workItem from="1668852756771" duration="3180000" />
+      <workItem from="1668852756771" duration="4018000" />
     </task>
     <task id="LOCAL-00001" summary="start writing LocalApplication">
       <created>1668110147849</created>
@@ -317,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668855441630</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="debug worker">
+      <created>1668856183340</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1668856183340</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,7 +346,8 @@
     <MESSAGE value="debug LocalApplication" />
     <MESSAGE value="fix pom" />
     <MESSAGE value="fix manager pom" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix manager pom" />
+    <MESSAGE value="debug worker" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug worker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
