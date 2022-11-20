@@ -15,11 +15,15 @@ import java.util.List;
 public class Worker {
 
     public static String processOCR(URL[] url ) throws IOException {
-        Ocr.setUp();
-        Ocr ocr = new Ocr();
-        ocr.startEngine("eng", Ocr.SPEED_FASTEST);
-        String imageText = ocr.recognize(url, Ocr.RECOGNIZE_TYPE_TEXT, Ocr.OUTPUT_FORMAT_PLAINTEXT);
-        return imageText;
+        try {
+            Ocr.setUp();
+            Ocr ocr = new Ocr();
+            ocr.startEngine("eng", Ocr.SPEED_FASTEST);
+            String imageText = ocr.recognize(url, Ocr.RECOGNIZE_TYPE_TEXT, Ocr.OUTPUT_FORMAT_PLAINTEXT);
+            return imageText;
+        } catch (OcrException e){
+            return "Unable to open the picture with  input file. " + e.getMessage()+ "\n";
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -54,7 +58,7 @@ public class Worker {
                     workersGetFromManager.deleteMessages(msg); // Remove the processed message from the SQS queue
                 }
             } else {
-                System.out.println("Missing Information in the message => worker can't do his job");
+                System.out.println("Waiting for a task");
             }
         }
     }

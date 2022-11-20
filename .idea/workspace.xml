@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="implement worker and manager part">
+    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/target/classes/worker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +59,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="TF_FMT" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
@@ -152,7 +154,7 @@
       <workItem from="1668852756771" duration="6680000" />
       <workItem from="1668925267305" duration="1981000" />
       <workItem from="1668927326241" duration="5202000" />
-      <workItem from="1668951914533" duration="3175000" />
+      <workItem from="1668951914533" duration="4551000" />
     </task>
     <task id="LOCAL-00001" summary="start writing LocalApplication">
       <created>1668110147849</created>
@@ -357,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668858514953</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="replace ocr package + ami details">
+      <created>1668956204487</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668956204487</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,15 +403,21 @@
     <MESSAGE value="fix manager pom" />
     <MESSAGE value="debug worker" />
     <MESSAGE value="print messages about progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="print messages about progress" />
+    <MESSAGE value="replace ocr package + ami details" />
+    <option name="LAST_COMMIT_MESSAGE" value="replace ocr package + ami details" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
