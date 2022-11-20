@@ -8,7 +8,7 @@ import java.util.Base64;
 
 public class EC2 {
     private static final software.amazon.awssdk.regions.Region REGION = Region.US_EAST_1;
-    private String AMI_ID = "ami-0bd185fd1d4a0be79";
+    private String AMI_ID = "ami-07b0cb5b5abb9dff7";
     private Ec2Client ec2Client;
     private String ec2Name;
     private String instanceId;
@@ -23,12 +23,12 @@ public class EC2 {
         ec2Client = Ec2Client.builder().region(REGION).build();
 
         IamInstanceProfileSpecification IAM_role = IamInstanceProfileSpecification.builder()
-                .arn("arn:aws:iam::078280469541:instance-profile/EMR_EC2_DefaultRole").build();
+                .arn("arn:aws:iam::262099114720:instance-profile/EMR_EC2_DefaultRole").build();
 
         RunInstancesRequest request = RunInstancesRequest.builder()
                 .imageId(AMI_ID)
                 .instanceType(InstanceType.T2_MICRO)
-                .securityGroupIds("sg-027c53166de5bc65f")
+                .securityGroupIds("sg-0d564df68a2822f15")
                 .iamInstanceProfile(IAM_role)
                 .maxCount(maxCount)
                 .minCount(minCount)
