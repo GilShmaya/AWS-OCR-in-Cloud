@@ -2,6 +2,7 @@ package services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.amazon.awssdk.awscore.util.SignerOverrideUtils;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
@@ -28,6 +29,7 @@ public class SQS {
     }
 
     public void create() {
+
         if (isActive()) {
             logger.error("The SQS is already active");
         }

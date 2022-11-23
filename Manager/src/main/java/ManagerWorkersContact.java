@@ -8,12 +8,12 @@ import java.util.List;
 public class ManagerWorkersContact implements Runnable {
     private DataBase dataBase;
     private boolean finish;
-    private SQS managerToWorkersQ;
+    private SQS workersToManager;
 
     public ManagerWorkersContact(SQS q){
         dataBase = DataBase.getInstance();
         finish=false;
-        managerToWorkersQ=q;
+        workersToManager=q;
     }
 
     public void processText (String key, String thisURL, String bucket, String localSQS, Message msg) throws IOException {
@@ -36,22 +36,21 @@ public class ManagerWorkersContact implements Runnable {
     }
 
     public void readMsg() throws IOException {
-        List<Message> nextMsg= managerToWorkersQ.getMessages();
+        List<Message> nextMsg= workersToManager.getMessages();
         if (!nextMsg.isEmpty()){
             for (Message msg : nextMsg) {
                 System.out.println("--- A new message from the manager to the workers is waiting ---");
                 if ((msg.body().substring(0,6)).equals("Finish")){
                     String [] msgToString = msg.body().substring(7).split(" ");
-
                     if(msgToString.length > 3) { //message contain all necessary information
                         String key= msgToString[0];
                         System.out.println("The Task: "+key+"\n");
-                        String bucket = msgToString[1];
-                        String localSQS= msgToString[2];
-                        String thisURL =msgToString[3];
+                        String bucket = msgToString[2];
+                        String localSQS= msgToString[3];
+                        String thisURL =msgToString[1];
 
                         // processing the text that needs to be written in the summary file
-                        // & send it to 'SetTaskImg' function, together with the local app's bucket.
+                        // & send it to 'processText' function, together with the local app's bucket.
                         processText(key, thisURL, bucket, localSQS, msg);
                     }
                     else {
@@ -61,14 +60,15 @@ public class ManagerWorkersContact implements Runnable {
                 }
             }
             // Remove the processed message from the SQS queue
-            managerToWorkersQ.deleteMessages(nextMsg);
+            workersToManager.deleteMessages(nextMsg);
         }
     }
 
     public void run() {
+        System.out.println("am i even running?");
         try {
-            managerToWorkersQ = new SQS("managerToWorkersQ");
-            managerToWorkersQ.requestQueueURL();
+            workersToManager = new SQS("workersToManager");
+            workersToManager.requestQueueURL();
             while(!finish) { // Until a termination message is sent by the manager
                 readMsg();
             }

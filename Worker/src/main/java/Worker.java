@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +40,8 @@ public class Worker {
             // The worker gets a message from an SQS queue
             List<Message> msg = workersGetFromManager.getMessages();
             if (!msg.isEmpty()) { // (Task_key, count, l[0], bucket, LocalQueue)
-                // todo : what is the l[0] above?
                 String task = msg.get(0).body();
                 String[] split = task.split(" ");
-                System.out.println(split);
                 if (split.length >= 3) { // all necessary information is available.
                     String name = split[0];
                     String url = split[1];
@@ -50,7 +49,12 @@ public class Worker {
                     String q = split[3];
 
                     // Downloads the image indicated in the message & performs OCR on the image
-                    String res = processOCR(new URL[]{new URL(url)});
+                    String res = "";
+                    try {
+                        res = processOCR(new URL[]{new URL(url)});
+                    } catch (MalformedURLException e){
+                        System.out.println("cant open url "+url+" got error: "+e);
+                    }
 
                     // Notify the manager of the text associated with that image
                     String summaryMsg = "Finish " + name + " " + bucket + " " + q + " " + url + " " + res;
