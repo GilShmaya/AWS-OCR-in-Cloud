@@ -1,6 +1,7 @@
 
 import com.asprise.ocr.*;
 
+import services.DataBase;
 import services.SQS;
 import software.amazon.awssdk.services.sqs.model.Message;
 
@@ -28,7 +29,7 @@ public class Worker {
     }
 
     public static void main(String[] args) throws IOException {
-        boolean doTerminate = false;
+        DataBase dataBase = DataBase.getInstance();
 
         SQS managerGetFromWorkers =
                 new SQS("workersToManagerSQS"); // SQS for the messages the workers send the manager.
@@ -36,12 +37,11 @@ public class Worker {
         SQS workersGetFromManager = new SQS("managerToWorkersSQS"); // SQS for the tasks the manager send to the workers
         workersGetFromManager.requestQueueURL();
 
-        while (!doTerminate) {
+        while (!dataBase.isTerminate()) {
             System.out.println("--- Start Working ---\n");
             // The worker gets a message from an SQS queue
             List<Message> msg = workersGetFromManager.getMessages();
             if (!msg.isEmpty()) { // (Task_key, count, l[0], bucket, LocalQueue)
-                // todo : what is the l[0] above?
                 String task = msg.get(0).body();
                 String[] split = task.split(" ");
                 System.out.println(split);

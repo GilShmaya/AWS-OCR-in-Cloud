@@ -69,7 +69,7 @@ public class ManagerWorkersContact implements Runnable {
         try {
             workerToManagerQ = new SQS("workersToManagerSQS");
             workerToManagerQ.requestQueueURL();
-            while(!finish) { // TODO: when is this true?
+            while(!dataBase.isTerminate()) {
                 readMsg();
             }
         } catch (IOException exception) {

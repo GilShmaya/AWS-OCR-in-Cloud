@@ -199,12 +199,16 @@ public class AppManagerContact implements Runnable {
     }
 
 
-    public void terminateWorkers () {
-        EC2 worker = DB.assignWorker();
-        while(worker!= null){
-            System.out.println("--- Terminates 1 worker ---");
+    public void terminateWorkers () { // TODO: check
+//        EC2 worker = DB.assignWorker();
+//        while(worker!= null){
+//            System.out.println("--- Terminates 1 worker ---");
+//            worker.terminate();
+////            worker = DB.assignWorker();
+//        }
+        List<EC2> workers = DB.getWorkersList();
+        for (EC2 worker : workers) {
             worker.terminate();
-            worker = DB.assignWorker();
         }
     }
 
@@ -216,19 +220,20 @@ public class AppManagerContact implements Runnable {
             try {
                 TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
-                exception.printStackTrace();
             }
         }
+        DB.terminate();
         System.out.println("--- All workers finished their job ---");
         WorkerActionThread.interrupt();
         terminateWorkers();
 
         // Terminate the local application to manager SQS
-        ManagerAndAppQ.remove();
+        System.out.println("delete the queues");
         ManagerAndWorkersQ.remove();
-        SQS WorkersManagerSQS = new SQS("workersToManagerSQS");
-        WorkersManagerSQS.requestQueueURL();
-        WorkersManagerSQS.remove();
+        ManagerAndAppQ.remove();
+//        SQS WorkersManagerSQS = new SQS("workersToManagerSQS"); //TODO
+//        WorkersManagerSQS.requestQueueURL();
+//        WorkersManagerSQS.remove();
         EC2 ec2= new EC2();
         try {
             DescribeInstancesRequest req = DescribeInstancesRequest.builder().build();
@@ -237,7 +242,7 @@ public class AppManagerContact implements Runnable {
                 for (Instance instance : reservation.instances()) {
                     String name=instance.tags().get(0).value();
                     String state=instance.state().name().toString();
-                    if(name.equals("Manager")&&(state.equals("running")||state.equals("pending"))) {
+                    if(name.equals("manager")&&(state.equals("running")||state.equals("pending"))) {
                         ec2.terminate(instance.instanceId());
                     }
                 }

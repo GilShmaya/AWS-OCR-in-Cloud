@@ -15,7 +15,6 @@ public class workersThread implements Runnable{
             try {
                 TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
-                exception.printStackTrace();
             }
             LinkedList<EC2> workers = dataBase.getWorkersList();
             if (!workers.isEmpty()) {

@@ -12,6 +12,7 @@ public class DataBase {
     private LinkedList<EC2> workersList;
     private int workersAmount;
     private int tasksAmount;
+    private boolean terminate;
 
 
     private static class singletonHolder {
@@ -150,5 +151,14 @@ public class DataBase {
             e.printStackTrace();
         }
         return file;
+    }
+
+    // switch the state - got terminate.
+    public synchronized void terminate(){
+        terminate = true;
+    }
+
+    public synchronized boolean isTerminate(){
+        return terminate;
     }
 }
