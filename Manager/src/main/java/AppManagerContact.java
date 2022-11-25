@@ -225,9 +225,7 @@ public class AppManagerContact implements Runnable {
         System.out.println("delete the queues");
         ManagerAndWorkersQ.remove();
         ManagerAndAppQ.remove();
-//        SQS WorkersManagerSQS = new SQS("workersToManagerSQS"); //TODO
-//        WorkersManagerSQS.requestQueueURL();
-//        WorkersManagerSQS.remove();
+
         EC2 ec2= new EC2();
         try {
             DescribeInstancesRequest req = DescribeInstancesRequest.builder().build();

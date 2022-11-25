@@ -118,7 +118,7 @@ public class DataBase {
     }
 
     public boolean writeLineToS3Object(String summaryFileLineContext,
-                                       String bucketName) { // TODO: check if summaryFilein2is needed
+                                       String bucketName) {
         try {
             File summaryFile = writeS3ObjectToFile(SUMMARY_FILE_PATH, "SummaryFile.txt", bucketName);
             BufferedReader reader = new BufferedReader(new FileReader(summaryFile));
