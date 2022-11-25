@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="changes">
+    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
@@ -49,9 +51,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$USER_HOME$/.jdks/openjdk-14.0.2/lib/src.zip!/java.base/java/net/URL.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="KubernetesApiPersistence">
     <option name="context" value="RS-2-EUW-Flink-AKS-gil-2" />
     <option name="namespace" value="default" />
@@ -73,13 +72,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="TF_FMT" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.formatter.settings.were.checked" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -88,13 +90,6 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
-  </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn clean install" />
-      <command value="mvn package" />
-      <command value="mvn clean" />
-    </option>
   </component>
   <component name="RunManager" selected="Application.Worker">
     <configuration name="LocalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -127,6 +122,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Manager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Worker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Worker" />
       <module name="Worker" />
@@ -134,24 +134,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Worker-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/Worker/target/Worker-1.0-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Application.Manager (1)" />
       <item itemvalue="Application.LocalApplication" />
+      <item itemvalue="Application.Manager" />
       <item itemvalue="Application.Worker" />
       <item itemvalue="Application.Manager (2)" />
-      <item itemvalue="JAR Application.Worker-1.0-SNAPSHOT.jar" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Worker" />
-        <item itemvalue="JAR Application.Worker-1.0-SNAPSHOT.jar" />
         <item itemvalue="Application.Manager (2)" />
         <item itemvalue="Application.LocalApplication" />
         <item itemvalue="Application.Manager (1)" />
+        <item itemvalue="Application.Manager" />
       </list>
     </recent_temporary>
   </component>
@@ -400,6 +396,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start writing LocalApplication" />
@@ -428,14 +425,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="2" />
+          <line>22</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

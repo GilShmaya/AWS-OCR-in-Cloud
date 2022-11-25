@@ -7,11 +7,11 @@ public class Manager {
         System.out.println("--- Create a new s3 ---");
         S3 s3 = new S3();
         System.out.println("--- Create a new SQS for the manager messages to the workers ---");
-        SQS ManagerToWorkers = new SQS("managerToWorkersQ" );
+        SQS ManagerToWorkers = new SQS("managerToWorkersSQS" );
         ManagerToWorkers.create();
         AppManagerContact ContactWithApp =new AppManagerContact(s3,ManagerToWorkers);
         System.out.println("--- Create a new SQS for the workers messages to the manager ---");
-        SQS WorkersToManager = new SQS("workersToManagerQ");
+        SQS WorkersToManager = new SQS("workersToManagerSQS");
         WorkersToManager.create();
         ManagerWorkersContact ContactWithWorkers= new ManagerWorkersContact(WorkersToManager);
 

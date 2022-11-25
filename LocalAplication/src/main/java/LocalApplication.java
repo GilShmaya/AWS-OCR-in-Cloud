@@ -142,6 +142,7 @@ public class LocalApplication {
             String inputFilePath = pathPrefix + args[0];
             outputFile = new File(pathPrefix + args[1]);
             int numberOfFilesPerWorker = Integer.parseInt(args[2]);
+
             createManager();
             String bucketLocation = uploadFileToS3(inputFilePath);
             managerToLocalSQS.create();
@@ -151,7 +152,6 @@ public class LocalApplication {
 
             System.out.println("Sent message to manager, waiting for a response");
             while (!isDoneMessage()) {
-                //todo: starts here and never finish !
             }
             System.out.println("A response was received from the manager.");
             createHTMLSummaryFile(doneMessage);

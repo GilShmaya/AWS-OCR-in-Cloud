@@ -23,16 +23,16 @@ public class Worker {
             String imageText = ocr.recognize(url, Ocr.RECOGNIZE_TYPE_TEXT, Ocr.OUTPUT_FORMAT_PLAINTEXT);
             return imageText;
         } catch (OcrException e){
-            return "Unable to open the picture with  input file. " + e.getMessage()+ "\n";
+            return "Can't open the picture";
         }
     }
 
     public static void main(String[] args) throws IOException {
         boolean doTerminate = false;
 
-        SQS managerGetFromWorkers = new SQS("workersToManagerQ"); // SQS for the messages the workers send the manager.
+        SQS managerGetFromWorkers = new SQS("workersToManagerSQS"); // SQS for the messages the workers send the manager.
         managerGetFromWorkers.requestQueueURL();
-        SQS workersGetFromManager = new SQS("managerToWorkersQ"); // SQS for the tasks the manager send to the workers
+        SQS workersGetFromManager = new SQS("managerToWorkersSQS"); // SQS for the tasks the manager send to the workers
         workersGetFromManager.requestQueueURL();
 
         while (!doTerminate) {
@@ -40,8 +40,10 @@ public class Worker {
             // The worker gets a message from an SQS queue
             List<Message> msg = workersGetFromManager.getMessages();
             if (!msg.isEmpty()) { // (Task_key, count, l[0], bucket, LocalQueue)
+                // todo : what is the l[0] above?
                 String task = msg.get(0).body();
                 String[] split = task.split(" ");
+                System.out.println(split);
                 if (split.length >= 3) { // all necessary information is available.
                     String name = split[0];
                     String url = split[1];
@@ -55,6 +57,7 @@ public class Worker {
                     } catch (MalformedURLException e){
                         System.out.println("cant open url "+url+" got error: "+e);
                     }
+                    System.out.println("Done working on url: " + url);
 
                     // Notify the manager of the text associated with that image
                     String summaryMsg = "Finish " + name + " " + bucket + " " + q + " " + url + " " + res;

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AppManagerContact implements Runnable {
     private SQS ManagerAndAppQ;
-    private SQS managerToWorkers;
+    private SQS ManagerAndWorkersQ;
     private S3 s3;
     private DataBase DB;
     private boolean terminate;
@@ -23,7 +23,7 @@ public class AppManagerContact implements Runnable {
     private Thread WorkerActionThread;
 
     public AppManagerContact(S3 s, SQS MW){
-        this.managerToWorkers= MW;
+        this.ManagerAndWorkersQ= MW;
         s3=s;
         DB= DataBase.getInstance();
         terminate=false;
@@ -110,8 +110,7 @@ public class AppManagerContact implements Runnable {
             while (line != null) { // there are more tasks to process
                 String [] Line= line.split("\n");
                 String msg = Task_key+"_"+counter+" "+Line[0]+" "+bucket+ " "+ LocalQueue;
-                System.out.println(msg + "message!");
-                managerToWorkers.send(msg);
+                ManagerAndWorkersQ.send(msg);
                 line = reader.readLine();
                 counter++;
             }
@@ -226,8 +225,8 @@ public class AppManagerContact implements Runnable {
 
         // Terminate the local application to manager SQS
         ManagerAndAppQ.remove();
-        managerToWorkers.remove();
-        SQS WorkersManagerSQS = new SQS("WorkersManagerSQS");
+        ManagerAndWorkersQ.remove();
+        SQS WorkersManagerSQS = new SQS("workersToManagerSQS");
         WorkersManagerSQS.requestQueueURL();
         WorkersManagerSQS.remove();
         EC2 ec2= new EC2();

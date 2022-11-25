@@ -43,6 +43,7 @@ public class workersThread implements Runnable{
                     }
                 }
             }
+            System.out.println("---done ---");
         }
 
     }
