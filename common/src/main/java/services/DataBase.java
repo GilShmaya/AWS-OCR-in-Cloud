@@ -4,7 +4,10 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class DataBase {
-    private static final String WORKER_DATA = ""; // TODO!
+    private static final String WORKER_DATA = "#! /bin/bash\n"+
+            "wget https://assignment1-dsp.s3.amazonaws.com/Worker-1.0-SNAPSHOT.jar\n"+
+            "java -jar Worker-1.0-SNAPSHOT.jar\n";
+
     private String USER_DIR_PROPERTY = System.getProperty("user.dir");
     private String SUMMARY_FILE_PATH = USER_DIR_PROPERTY + "/SummaryFile.txt";
     private String OCR_FILE_PATH = USER_DIR_PROPERTY + "/OCRFile.txt";
