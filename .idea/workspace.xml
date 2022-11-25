@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" afterDir="false" />
@@ -84,7 +81,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Worker">
+  <component name="RunManager" selected="Application.LocalApplication">
     <configuration name="LocalApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LocalApplication" />
       <module name="LocalAplication" />
@@ -136,9 +133,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LocalApplication" />
         <item itemvalue="Application.Worker" />
         <item itemvalue="Application.Manager (2)" />
-        <item itemvalue="Application.LocalApplication" />
         <item itemvalue="Application.Manager (1)" />
         <item itemvalue="Application.Manager" />
       </list>
@@ -387,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669368889216</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="debug terminate">
+      <created>1669373612344</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1669373612344</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,19 +431,20 @@
     <MESSAGE value="replace ocr package + ami details" />
     <MESSAGE value="fix manager code handle worker done message" />
     <MESSAGE value="done debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="done debug" />
+    <MESSAGE value="debug terminate" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug terminate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
-          <line>23</line>
+          <line>25</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
-          <line>24</line>
+          <line>26</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -449,7 +454,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Worker/src/main/java/Worker.java</url>
-          <line>45</line>
+          <line>53</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

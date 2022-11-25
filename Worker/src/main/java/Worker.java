@@ -4,6 +4,7 @@ import com.asprise.ocr.*;
 import services.DataBase;
 import services.SQS;
 import software.amazon.awssdk.services.sqs.model.Message;
+import software.amazon.awssdk.services.sqs.model.QueueDoesNotExistException;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Worker {
@@ -36,11 +38,17 @@ public class Worker {
         managerGetFromWorkers.requestQueueURL();
         SQS workersGetFromManager = new SQS("managerToWorkersSQS"); // SQS for the tasks the manager send to the workers
         workersGetFromManager.requestQueueURL();
+        List<Message> msg = new LinkedList<>();
 
         while (!dataBase.isTerminate()) {
             System.out.println("--- Start Working ---\n");
             // The worker gets a message from an SQS queue
-            List<Message> msg = workersGetFromManager.getMessages();
+            try {
+                msg = workersGetFromManager.getMessages();
+            } catch (QueueDoesNotExistException e){
+                if (dataBase.isTerminate())
+                    return;
+            }
             if (!msg.isEmpty()) { // (Task_key, count, l[0], bucket, LocalQueue)
                 String task = msg.get(0).body();
                 String[] split = task.split(" ");

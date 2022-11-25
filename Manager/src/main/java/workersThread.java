@@ -11,7 +11,7 @@ public class workersThread implements Runnable{
     public void run() {
         EC2 ec2= new EC2();
         DataBase dataBase= DataBase.getInstance();
-        while(true) {
+        while(!dataBase.isTerminate()) {
             try {
                 TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
@@ -19,10 +19,8 @@ public class workersThread implements Runnable{
             LinkedList<EC2> workers = dataBase.getWorkersList();
             if (!workers.isEmpty()) {
                 for (EC2 worker : workers) {
-                    System.out.println("---start---");
                     DescribeInstancesRequest ask = DescribeInstancesRequest.builder().instanceIds(worker.getInstanceId()).build();
                     DescribeInstancesResponse ans = ec2.getEC2Client().describeInstances(ask);
-                    System.out.println("---finish response---");
                     for (Reservation reservation : ans.reservations()) {
                         for (Instance instance : reservation.instances()) {
                             if(instance.instanceId().equals(worker.getInstanceId())) {
@@ -35,7 +33,6 @@ public class workersThread implements Runnable{
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-                                    System.out.println("---add---");
                                 }
                             }
                         }

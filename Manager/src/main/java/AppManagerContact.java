@@ -199,13 +199,7 @@ public class AppManagerContact implements Runnable {
     }
 
 
-    public void terminateWorkers () { // TODO: check
-//        EC2 worker = DB.assignWorker();
-//        while(worker!= null){
-//            System.out.println("--- Terminates 1 worker ---");
-//            worker.terminate();
-////            worker = DB.assignWorker();
-//        }
+    public void terminateWorkers () {
         List<EC2> workers = DB.getWorkersList();
         for (EC2 worker : workers) {
             worker.terminate();

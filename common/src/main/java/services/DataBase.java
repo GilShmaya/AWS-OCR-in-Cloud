@@ -12,7 +12,7 @@ public class DataBase {
     private LinkedList<EC2> workersList;
     private int workersAmount;
     private int tasksAmount;
-    private boolean terminate;
+    private boolean terminate = false;
 
 
     private static class singletonHolder {
