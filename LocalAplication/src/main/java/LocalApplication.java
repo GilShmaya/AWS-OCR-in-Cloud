@@ -118,7 +118,7 @@ public class LocalApplication {
                     bufferedWriter.write("<p> " + line + "</p>");
                 }
             }
-            System.out.println("The summery file was created successfully.");
+            System.out.println("The output html file was created successfully.");
 
             bufferedWriter.close();
             bufferedReader.close();

@@ -39,13 +39,13 @@ public class ManagerWorkersContact implements Runnable {
         List<Message> nextMsg= workerToManagerQ.getMessages();
         if (!nextMsg.isEmpty()){
             for (Message msg : nextMsg) {
-                System.out.println("--- A new message from the worker is waiting ---");
-                if (msg.body().startsWith("Finish")){
+                if (msg.body().startsWith("finish")){
+                    System.out.println("--- A new message from the worker is waiting ---");
                     String [] msgToString = msg.body().split(" ");
 
-                    if(msgToString.length > 3) { //message contain all necessary information
+                    if(msgToString.length >= 5) { //message contain all necessary information
                         String key= msgToString[1];
-                        System.out.println("The Task: "+key+"\n");
+                        System.out.println("Got a result from worker regarding task: "+key+" \n");
                         String bucket = msgToString[2];
                         String localSQS= msgToString[3];
                         String thisURL =msgToString[4];
