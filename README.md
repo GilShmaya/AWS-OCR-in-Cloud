@@ -8,8 +8,17 @@ Project details :
 - AMI - "ami-07b0cb5b5abb9dff7"
 - Instance type  - t2.micro
 - IAM_Role - "arn:aws:iam::262099114720:instance-profile/LabInstanceProfile"
-- Total time to finish working on the input files : 
+- Total time to finish working on the input files :
+  n=10 => 2 minutes (for an input file with 25 raws).
+  n=5 => 2.5 minutes (for an input file with 25 raws).
+  
 #### Running the program :
+1. Get the updated credentials file from the AWS academy and place it on the local dir /.aws/credentials.
+2. Upload Worker.jar and Manager.jar to the bucket in S3 (bucket name: assignment1).
+3. Make the jar files (Worker.jar and Manager.jar) public.
+4. Insert the input file to the src folder (create src folder if needed).
+5. Put the Local.jar in the same path as the src folder. 
+6. Run the local Application as follows- java -jar Local.jar <inputFileName> <outputFileName> <n> <terminate>
 
 
 #### Program flow :
