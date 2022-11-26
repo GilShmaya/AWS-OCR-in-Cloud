@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="clean code">
+    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -412,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669388505817</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="update user data">
+      <created>1669391584700</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1669391584700</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +453,8 @@
     <MESSAGE value="done debug" />
     <MESSAGE value="debug terminate" />
     <MESSAGE value="clean code" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean code" />
+    <MESSAGE value="update user data" />
+    <option name="LAST_COMMIT_MESSAGE" value="update user data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

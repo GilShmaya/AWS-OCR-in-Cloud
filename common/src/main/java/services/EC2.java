@@ -8,7 +8,7 @@ import java.util.Base64;
 
 public class EC2 {
     private static final software.amazon.awssdk.regions.Region REGION = Region.US_EAST_1;
-    private String AMI_ID = "ami-07b0cb5b5abb9dff7";
+    private String AMI_ID = "ami-02ff689598f4b3d68";
     private Ec2Client ec2Client;
     private String ec2Name;
     private String instanceId;
