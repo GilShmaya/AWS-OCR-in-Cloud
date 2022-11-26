@@ -2,17 +2,19 @@ package services;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
 
 public class DataBase {
     private static final String WORKER_DATA = "#! /bin/bash\n"+
-            "wget https://assignment1-dsp.s3.amazonaws.com/Worker-1.0-SNAPSHOT.jar\n"+
+            "wget https://assignment1.s3.amazonaws.com/Worker-1.0-SNAPSHOT.jar\n"+
             "java -jar Worker-1.0-SNAPSHOT.jar\n";
-
     private String USER_DIR_PROPERTY = System.getProperty("user.dir");
     private String SUMMARY_FILE_PATH = USER_DIR_PROPERTY + "/SummaryFile.txt";
     private String OCR_FILE_PATH = USER_DIR_PROPERTY + "/OCRFile.txt";
     private S3 s3;
-    private LinkedList<EC2> workersList;
+    private ConcurrentLinkedQueue<EC2> workersList;
     private int workersAmount;
     private int tasksAmount;
     private boolean terminate = false;
@@ -28,12 +30,12 @@ public class DataBase {
 
     private DataBase() {
         s3 = new S3();
-        workersList = new LinkedList<EC2>();
+        workersList = new ConcurrentLinkedQueue<EC2>();
         workersAmount = 0;
         tasksAmount = 0;
     }
 
-    public synchronized boolean isAvailableWorker() {
+    public boolean isAvailableWorker() {
         return !workersList.isEmpty();
     }
 
@@ -41,7 +43,7 @@ public class DataBase {
         return workersAmount;
     }
 
-    public LinkedList<EC2> getWorkersList() {
+    public ConcurrentLinkedQueue<EC2> getWorkersList() {
         return workersList;
     }
 
@@ -51,6 +53,10 @@ public class DataBase {
     }
 
     public synchronized void addAmountOfWorkers(int amountOfWorkersNeeded) {
+        if(workersAmount + amountOfWorkersNeeded >= 18) {
+            System.err.println("More then 18 workers is forbidden");
+            System.exit(1);
+        }
         while (amountOfWorkersNeeded > 0) {
             EC2 worker = new EC2("worker" + workersAmount, 1, 1, WORKER_DATA);
             addWorker(worker);
@@ -63,11 +69,11 @@ public class DataBase {
             return null;
         } else {
             workersAmount--;
-            return workersList.removeFirst();
+            return workersList.remove();
         }
     }
 
-    public void removeWorker(EC2 worker) {
+    public synchronized void removeWorker(EC2 worker) {
         workersList.remove(worker);
         workersAmount--;
     }

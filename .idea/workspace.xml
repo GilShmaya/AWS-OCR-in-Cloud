@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="">
+    <list default="true" id="6dad8757-2e71-4c92-91a1-20583d2a4da0" name="Changes" comment="set ami role">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/src/main/java/LocalApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/classes/LocalApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/LocalAplication/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/AppManagerContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/ManagerWorkersContact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/ManagerWorkersContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/src/main/java/workersThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/AppManagerContact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/classes/workersThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/src/main/java/Worker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Worker/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/services/EC2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -419,7 +427,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669469357826</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="set ami role">
+      <created>1669471892471</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1669471892471</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +453,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="start writing LocalApplication" />
     <MESSAGE value="start writing SQS" />
     <MESSAGE value="rearrange modules" />
     <MESSAGE value="implement SQS" />
@@ -463,7 +477,8 @@
     <MESSAGE value="clean code" />
     <MESSAGE value="update user data" />
     <MESSAGE value="update ami" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ami" />
+    <MESSAGE value="set ami role" />
+    <option name="LAST_COMMIT_MESSAGE" value="set ami role" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

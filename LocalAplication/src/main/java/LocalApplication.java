@@ -21,7 +21,7 @@ public class LocalApplication {
     private static final String LOCAL_TO_MANAGER_SQS_NAME = "localToManagerSQS";
     private static final String MANAGER_TO_LOCAL_SQS_NAME = "managerToLocalSQS" + new Date().getTime();
     private static final String SUMMARY_FILE_PATH = System.getProperty("user.dir") + "/src/summaryFile.txt";
-    private static final String MANAGER_DATA = "#! /bin/bash\n"+"wget https://assignment1-dsp.s3.amazonaws.com/manager-1.0-SNAPSHOT.jar\n"+"java -jar manager-1.0-SNAPSHOT.jar\n";
+    private static final String MANAGER_DATA = "#! /bin/bash\n"+"wget https://assignment1.s3.amazonaws.com/manager-1.0-SNAPSHOT.jar\n"+"java -jar manager-1.0-SNAPSHOT.jar\n";
     private static final Logger logger = LoggerFactory.getLogger(LocalApplication.class);
     private static final String MANAGER_NAME = "manager";
     private static final String pathPrefix = System.getProperty("user.dir") + "/src/";

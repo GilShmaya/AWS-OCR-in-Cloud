@@ -8,7 +8,7 @@ import java.util.Base64;
 
 public class EC2 {
     private static final software.amazon.awssdk.regions.Region REGION = Region.US_EAST_1;
-    private String AMI_ID = "ami-01aa1b3ab4f2343ab";
+    private String AMI_ID = "ami-07b0cb5b5abb9dff7";
     private Ec2Client ec2Client;
     private String ec2Name;
     private String instanceId;
@@ -72,7 +72,7 @@ public class EC2 {
                     .instanceIds(instanceId)
                     .build();
             ec2Client.terminateInstances(TerminateRequest);
-            System.out.printf("Successfully terminated EC2 Instance %s based on AMI %s", instanceId, AMI_ID);
+            System.out.println("Successfully terminated EC2 Instance %s based on AMI " + instanceId + AMI_ID);
         } catch (Ec2Exception e) {
             System.out.println(e.awsErrorDetails().errorMessage());
         }
@@ -84,7 +84,7 @@ public class EC2 {
                     .instanceIds(instanceId)
                     .build();
             ec2Client.terminateInstances(TerminateRequest);
-            System.out.printf("Successfully terminated EC2 Instance %s based on AMI %s", instanceId, AMI_ID);
+            System.out.println("Successfully terminated EC2 Instance %s based on AMI " + instanceId + AMI_ID);
         } catch (Ec2Exception e) {
             System.out.println(e.awsErrorDetails().errorMessage());
         }

@@ -9,7 +9,7 @@ public class Manager {
         System.out.println("--- Create a new SQS for the manager messages to the workers ---");
         SQS ManagerToWorkers = new SQS("managerToWorkersSQS" );
         ManagerToWorkers.create();
-        AppManagerContact ContactWithApp =new AppManagerContact(s3,ManagerToWorkers);
+        AppManagerContact ContactWithApp = new AppManagerContact(s3,ManagerToWorkers);
         System.out.println("--- Create a new SQS for the workers messages to the manager ---");
         SQS WorkersToManager = new SQS("workersToManagerSQS");
         WorkersToManager.create();

@@ -11,7 +11,7 @@ public class ManagerWorkersContact implements Runnable {
 
     public ManagerWorkersContact(SQS q){
         dataBase = DataBase.getInstance();
-        workerToManagerQ =q;
+        workerToManagerQ = q;
     }
 
     public void processText (String key, String thisURL, String bucket, String localSQS, Message msg) throws IOException {

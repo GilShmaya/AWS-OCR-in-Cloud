@@ -40,7 +40,7 @@ public class Worker {
         workersGetFromManager.requestQueueURL();
         List<Message> msg = new LinkedList<>();
 
-        while (!dataBase.isTerminate()) {
+        while (true) {
             System.out.println("--- Start Working ---\n");
             // The worker gets a message from an SQS queue
             try {

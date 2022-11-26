@@ -5,6 +5,7 @@ import software.amazon.awssdk.services.ec2.model.DescribeInstancesResponse;
 import software.amazon.awssdk.services.ec2.model.Instance;
 import software.amazon.awssdk.services.ec2.model.Reservation;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 
 public class workersThread implements Runnable{
@@ -16,7 +17,7 @@ public class workersThread implements Runnable{
                 TimeUnit.SECONDS.sleep(45);
             } catch (InterruptedException exception) {
             }
-            LinkedList<EC2> workers = dataBase.getWorkersList();
+            ConcurrentLinkedQueue<EC2> workers = dataBase.getWorkersList();
             if (!workers.isEmpty()) {
                 for (EC2 worker : workers) {
                     DescribeInstancesRequest ask = DescribeInstancesRequest.builder().instanceIds(worker.getInstanceId()).build();
