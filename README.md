@@ -84,7 +84,7 @@ Moreover, we make little use of the manager's memory
 
 ###### Persistence:
 
-As long as a worker works on a task, the message he is dealing with stays in the main SQS, and only after finish processing the task, it will be deleted. That way, in case a node (worker) cant finish his job, another worker will take it. 
+As long as a worker works on a task, the message he is dealing with stays in the sqs queue of the tasks that needs to be procesed, and only after finish processing the task, it will be deleted. That way, in case a node (worker) cant finish his job, another worker will take it. 
 In order to handle the workers activity, we created another thread - WorkersThread - that constantly checks if all active workers are working. In case a termination of a worker, he will be removed from database and a new worker will be added instead. 
 In some cases, the worker's job might take a while (a node stalls for a while), so in order to deal with this problem and let the worker finish his task we extended the visibility timeout.
 
