@@ -7,12 +7,10 @@ import java.util.List;
 
 public class ManagerWorkersContact implements Runnable {
     private DataBase dataBase;
-    private boolean finish;
     private SQS workerToManagerQ;
 
     public ManagerWorkersContact(SQS q){
         dataBase = DataBase.getInstance();
-        finish=false;
         workerToManagerQ =q;
     }
 
