@@ -58,7 +58,7 @@ Project details :
 9. MWC delete the processed message from workerToManagerQ. 
 
 
-- Workers :
+##### Workers :
 
 1. As the Workers was activated in the DataBase (by the AppManagerContact thread) it creates two sqs queues:
 2. workersToManagerSQS - where the workers can send messages to the manager.
