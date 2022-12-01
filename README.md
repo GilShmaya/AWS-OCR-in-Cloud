@@ -84,6 +84,7 @@ Project details :
 
 
 ###### Security : 
+We saved the credential on a local file and connect without revealing the details
 
 ###### Scalability: 
 
