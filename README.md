@@ -31,8 +31,8 @@ Project details :
 5. Local App creates a new (and personal) sqs queue - through which it can receives messages from the manager (ManagerToLocalSQS).
 6. Local App sends a message to the manager, that includes all necessary information in order to perform the task (including location of input file in s3).
 7. Local App waits for the manager's response.
-8. Local App generate html output from response she got, deleting the personal sqs queue with the manager.
-9. Local App checks is a termination message occured - if it does, sends a terminate message to the manager.
+8. Local App generate html output from the manager's response, and delete the personal sqs queue with the manager.
+9. Local App checks if a termination message occured - if it does, sends a terminate message to the manager.
 
 
 
@@ -44,7 +44,7 @@ Project details :
 
 * AppManagerContact (AMC) :
 
-1. AMC Create new sqs queue (localToManagerSQS) and runs a new thread - WorkersThred : a thread that checks if all active workers are working all the time. 
+1. AMC Create a new sqs queue (localToManagerSQS) and runs a new thread - WorkersThred : a thread that checks if all active workers are working all the time. 
 2. AMC runs in while loop (until a terminate message sent by local app) checking if a new message arrived from the local application (through localToManagerSQS).
 3. if a termination message arrives - AMC activates the function Terminate (waiting for all activates workers to finish and then terminate).
 4. if a task message arrives- AMC crate a new task - get the information from the message, (key, bucket and n (the ratio of workers-images))
@@ -83,12 +83,12 @@ Project details :
 
 
 
-###### Security :
+###### Security : 
 
 ###### Scalability: 
 
 The buttle neck of this project is the Manager, so in order to deal with the scalability, we used three threads to divide his work. 
-The AppManagerContact and the ManagerWorkersContact are constantly checking their SQS waiting for new information - and therefor the Manager never has to wait. 
+The AppManagerContact and the ManagerWorkersContact are constantly checking their SQS waiting for new information - and therefor the Manager never has to wait, and the workersThreads that make sure all workers are working all the time.
 Moreover, we make little use of the manager's memory
 
 ###### Persistence:
